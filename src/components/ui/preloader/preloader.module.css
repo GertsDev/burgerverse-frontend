@@ -1,0 +1,31 @@
+.preloader {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader_circle {
+  display: block;
+  width: 74px;
+  height: 74px;
+  border: 1px solid;
+  border-color: #d1d2d6 #9fa0a5 #626368 #1a1b22;
+
+  border-radius: 50%;
+
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+
+  animation: spin 0.75s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

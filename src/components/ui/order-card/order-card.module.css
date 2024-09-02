@@ -1,0 +1,66 @@
+.ingredients {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.order {
+  display: block;
+  text-decoration: none;
+  color: unset;
+  background-color: #1c1c21;
+  border-radius: 40px;
+  min-width: 576px;
+  box-sizing: border-box;
+}
+
+.order_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order_name {
+  text-align: left;
+}
+
+.order_content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order_total {
+  vertical-align: top;
+}
+
+.img_wrap {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: #801ab3 solid 2px;
+  background-color: #1c1c21;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.img_wrap:nth-child(n + 2) {
+  position: relative;
+  right: 25px;
+}
+
+.img {
+  position: relative;
+  right: 25px;
+  width: 112px;
+  height: 56px;
+}
+
+.remains {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

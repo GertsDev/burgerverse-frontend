@@ -1,0 +1,16 @@
+.element {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.element:last-child {
+  margin-bottom: 0;
+}
+
+.element_fullwidth {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 536px;
+}
