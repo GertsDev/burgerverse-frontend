@@ -12,10 +12,6 @@ export const ResetPassword: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    /*
-      Здесь допускается не использовать redux для
-      выполнения запроса
-    */
     setError(null);
     resetPasswordApi({ password, token })
       .then(() => {

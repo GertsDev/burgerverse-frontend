@@ -1,6 +1,10 @@
+import { ProfileOrdersUI } from '@ui-pages';
+import { TOrder } from '@utils-types';
 import { FC } from 'react';
 
-export const ProfileOrders: FC = () =>
-  // return <ProfileOrdersUI orders={orders} />;
+export const ProfileOrders: FC = () => {
+  /** TODO: взять переменную из стора */
+  const orders: TOrder[] = [];
 
-  null;
+  return <ProfileOrdersUI orders={orders} />;
+};
