@@ -30,7 +30,7 @@ export const BurgerConstructor: FC = () => {
     [constructorItems]
   );
 
-  return null;
+  //return null;
 
   return (
     <BurgerConstructorUI
