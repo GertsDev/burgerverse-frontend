@@ -75,7 +75,6 @@ export const getIngredientsApi = () =>
   fetch(`${URL}/ingredients`)
     .then((res) => checkResponse<TIngredientsResponse>(res))
     .then((data) => {
-      console.log(data);
       if (data?.success) return data.data;
       return Promise.reject(data);
     });
@@ -116,6 +115,7 @@ export const orderBurgerApi = (data: string[]) =>
       ingredients: data
     })
   }).then((data) => {
+    console.log(data);
     if (data?.success) return data;
     return Promise.reject(data);
   });

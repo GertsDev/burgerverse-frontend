@@ -20,9 +20,17 @@ import {
   ProtectedRoute
 } from '@components';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { getIngredients } from '../../services/slices/ingredients/ingredients-slice';
+import { useDispatch } from '../../services/store';
 
 const App = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>
