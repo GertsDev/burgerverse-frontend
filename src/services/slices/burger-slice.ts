@@ -39,7 +39,6 @@ export const burgerConstructorSlice = createSlice({
     },
     removeIngredient: (state, action: PayloadAction<string>) => {
       // Added PayloadAction typing for clarity
-      console.log(action.payload);
       state.ingredients = state.ingredients.filter(
         (item) => item.id !== action.payload
       );

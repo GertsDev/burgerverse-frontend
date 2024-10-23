@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import {
   Input,
   Button,
@@ -45,10 +45,10 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               placeholder='E-mail'
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              name={'email'}
+              name='email'
               error={false}
               errorText=''
-              size={'default'}
+              size='default'
             />
           </div>
           <div className='pb-6'>

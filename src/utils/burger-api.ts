@@ -83,6 +83,7 @@ export const getFeedsApi = () =>
   fetch(`${URL}/orders/all`)
     .then((res) => checkResponse<TFeedsResponse>(res))
     .then((data) => {
+      console.log(data);
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -115,7 +116,6 @@ export const orderBurgerApi = (data: string[]) =>
       ingredients: data
     })
   }).then((data) => {
-    console.log(data);
     if (data?.success) return data;
     return Promise.reject(data);
   });
@@ -154,6 +154,7 @@ export const registerUserApi = (data: TRegisterData) =>
   })
     .then((res) => checkResponse<TAuthResponse>(res))
     .then((data) => {
+      console.log(data);
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -173,6 +174,7 @@ export const loginUserApi = (data: TLoginData) =>
   })
     .then((res) => checkResponse<TAuthResponse>(res))
     .then((data) => {
+      console.log(data);
       if (data?.success) return data;
       return Promise.reject(data);
     });

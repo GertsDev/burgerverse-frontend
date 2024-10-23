@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 import { useSelector } from 'react-redux';
-import { getIngredientState } from '../../services/slices/ingredients/ingredients-slice';
+import { getIngredientState } from '../../services/slices/ingredients-slice';
 
 export const BurgerIngredients: FC = () => {
   /** TODO: взять переменные из стора */
