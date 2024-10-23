@@ -1,12 +1,18 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { useSelector } from '../../services/store';
+import { getUserState } from '../../services/slices/userSlice';
+import { TUser } from '@utils-types';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
-  const user = {
-    name: '',
-    email: ''
-  };
+  const user = useSelector(getUserState).user as TUser;
+  console.log(user);
+
+  if (!user) {
+    // На всякий пожарный
+    throw new Error('User is null in Profile component');
+  }
 
   const [formValue, setFormValue] = useState({
     name: user.name,

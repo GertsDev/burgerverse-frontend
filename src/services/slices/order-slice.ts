@@ -46,12 +46,10 @@ export const orderSlice = createSlice({
       .addCase(placeOrder.fulfilled, (state, action) => {
         state.loading = false;
         state.order = action.payload;
-        console.log('success');
       })
       .addCase(placeOrder.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-        console.log('hui');
       });
   }
 });

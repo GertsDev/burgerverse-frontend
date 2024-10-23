@@ -1,15 +1,29 @@
-import React from 'react';
-//import {useSelector} from 'react-redux';
-import { Outlet, Navigate } from 'react-router-dom';
-//import {RootState} from '../../store';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useSelector } from '../../services/store';
+import { Preloader } from '../ui/preloader';
+import { getUserState } from '../../services/slices/userSlice';
 
-export const ProtectedRoute = ({ accessRoles }: any) => <Outlet />;
-//const { user, isInit, isLoading } = useSelector((store: RootState) => store.user);
+type ProtectedRouteProps = {
+  onlyAuthorized?: boolean;
+};
 
-// if (!isInit || isLoading) {
-//     return <div>Загрузка...</div>
-// }
+export const ProtectedRoute = ({ onlyAuthorized }: ProtectedRouteProps) => {
+  const location = useLocation();
+  const { isAuthChecked, isAuthenticated, loading } = useSelector(getUserState);
 
-// if (!user || !accessRoles.includes(user.role)) {
-//     return <Navigate to="/sign-in" />;
-// }
+  console.log(isAuthChecked, isAuthenticated);
+
+  if (loading || !isAuthChecked) {
+    return <Preloader />;
+  }
+
+  if (onlyAuthorized === false && isAuthenticated) {
+    return <Navigate replace to='/' />;
+  }
+
+  if (onlyAuthorized === true && !isAuthenticated) {
+    return <Navigate replace to='/login' state={{ from: location }} />;
+  }
+
+  return <Outlet />;
+};
