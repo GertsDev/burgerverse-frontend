@@ -22,10 +22,11 @@ import {
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getIngredients } from '../../services/slices/ingredients-slice';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { ImagePreloader } from '../image-preloader/image-preloader';
-import { fetchUser } from '../../services/slices/userSlice';
+import { getUserState } from '../../services/slices/userSlice';
 import { getCookie } from '../../utils/cookie';
+import { checkUserAuth } from '../../services/authActions';
 
 const App = () => {
   const navigate = useNavigate();
@@ -33,19 +34,14 @@ const App = () => {
   const location = useLocation();
 
   const state = location.state as { background?: Location };
+  const { isAuthenticated, isAuthChecked } = useSelector(getUserState);
 
-  const accessToken = getCookie('accessToken');
-  console.log('Access Token:', accessToken);
-  if (!accessToken) {
-    console.error('Access token is missing');
-  }
+  useEffect(() => {
+    dispatch(checkUserAuth());
+  }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
     dispatch(getIngredients());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchUser());
   }, [dispatch]);
 
   return (

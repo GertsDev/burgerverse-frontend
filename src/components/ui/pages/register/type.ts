@@ -6,4 +6,5 @@ export type RegisterUIProps = PageUIProps & {
   userName: string;
   setPassword: Dispatch<SetStateAction<string>>;
   setUserName: Dispatch<SetStateAction<string>>;
+
 };

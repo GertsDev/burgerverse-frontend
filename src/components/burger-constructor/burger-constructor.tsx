@@ -2,6 +2,7 @@ import { FC, useEffect, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from '../../services/store';
+import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate
 import {
   clearConstructor,
   getBurgerState
@@ -11,11 +12,12 @@ import {
   getOrderState,
   placeOrder
 } from '../../services/slices/order-slice';
+import { getUserState } from '../../services/slices/userSlice'; // Импортируем состояние пользователя
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Инициализируем навигацию
+  const { isAuthenticated } = useSelector(getUserState); // Получаем состояние авторизации
 
   const constructorItems = useSelector(getBurgerState);
   const { order, loading: orderRequest, error } = useSelector(getOrderState);
@@ -25,6 +27,12 @@ export const BurgerConstructor: FC = () => {
   const { bun, ingredients } = constructorItems;
 
   const onOrderClick = () => {
+    if (!isAuthenticated) {
+      // Если пользователь не авторизован, перенаправляем на страницу логина
+      navigate('/login');
+      return;
+    }
+
     if (!constructorItems.bun || orderRequest) return;
 
     const ingredientIds = [
@@ -35,6 +43,7 @@ export const BurgerConstructor: FC = () => {
 
     dispatch(placeOrder(ingredientIds));
   };
+
   const closeOrderModal = () => {
     dispatch(clearOrder());
   };
@@ -54,8 +63,6 @@ export const BurgerConstructor: FC = () => {
       dispatch(clearConstructor());
     }
   }, [order, orderRequest, error, dispatch]);
-
-  //return null;
 
   return (
     <BurgerConstructorUI
