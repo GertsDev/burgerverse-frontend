@@ -1,172 +1,127 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  TRegisterData,
-  TLoginData,
-  registerUserApi,
-  loginUserApi,
-  getUserApi,
-  logoutApi,
-  refreshToken,
-  fetchWithRefresh
-} from '@api';
+  login,
+  logout,
+  getUser,
+  registerUser,
+  checkUserAuth,
+  updateUser
+} from '../authActions';
 import { TUser } from '@utils-types';
-import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { RootState } from '../store';
 
-interface UserState {
+type TAuthState = {
   user: TUser | null;
-  isAuthenticated: boolean;
   isAuthChecked: boolean;
+  isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
-}
+};
 
-const initialState: UserState = {
+const initialState: TAuthState = {
   user: null,
-  isAuthenticated: false,
   isAuthChecked: false,
+  isAuthenticated: false,
   loading: false,
   error: null
 };
 
-// Асинхронное действие для регистрации пользователя
-export const registerUser = createAsyncThunk<
-  TUser,
-  TRegisterData,
-  { rejectValue: string }
->('user/register', async (userData, { rejectWithValue }) => {
-  try {
-    const response = await registerUserApi(userData);
-    // Сохраняем токены
-    setCookie('accessToken', response.accessToken); // Сохраняем accessToken
-    localStorage.setItem('refreshToken', response.refreshToken); // Сохраняем refreshToken
-    return response.user;
-  } catch (err: any) {
-    return rejectWithValue(err.message);
-  }
-});
-
-// Асинхронное действие для логина пользователя
-export const loginUser = createAsyncThunk<
-  TUser,
-  TLoginData,
-  { rejectValue: string }
->('user/login', async (loginData, { rejectWithValue }) => {
-  try {
-    const response = await loginUserApi(loginData);
-    // Сохраняем токены
-    setCookie('accessToken', response.accessToken); // Сохраняем accessToken
-    localStorage.setItem('refreshToken', response.refreshToken); // Сохраняем refreshToken
-    return response.user;
-  } catch (err: any) {
-    return rejectWithValue(err.message);
-  }
-});
-
-export const fetchUser = createAsyncThunk<TUser, void, { rejectValue: string }>(
-  'user/fetchUser',
-  async (_, { rejectWithValue }) => {
-    try {
-      const accessToken = getCookie('accessToken'); // Проверяем, есть ли токен
-      console.log('accessToken:', accessToken); // Логирование accessToken
-
-      if (!accessToken) {
-        console.error('Access token is missing');
-        throw new Error('Access token is missing');
-      }
-
-      // Объявляем заголовки корректно внутри запроса
-      const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${accessToken}`
-      };
-
-      const response = await fetchWithRefresh<TUser>('/api/auth/user', {
-        method: 'GET',
-        headers // Используем переменную заголовков
-      });
-
-      console.log('API response:', response); // Логирование ответа API
-      return response;
-    } catch (err: any) {
-      console.error('Ошибка при получении пользователя:', err);
-      return rejectWithValue(err.message);
-    }
-  }
-);
-// Асинхронное действие для выхода пользователя
-export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
-  'user/logout',
-  async (_, { rejectWithValue }) => {
-    try {
-      await logoutApi();
-      // Удаляем токены
-      deleteCookie('accessToken');
-      localStorage.removeItem('refreshToken');
-    } catch (err: any) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
-
-const userSlice = createSlice({
-  name: 'user',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
-    // Дополнительные редьюсеры, если нужны
+    setUser: (state, action: PayloadAction<TUser | null>) => {
+      state.user = action.payload;
+      state.isAuthenticated = !!action.payload;
+    },
+    setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
+      state.isAuthChecked = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
-      // Регистрация пользователя
+      // Регистрация
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
+        state.isAuthChecked = true;
+        state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
+        state.error = action.error.message || 'Ошибка при регистрации';
         state.loading = false;
-        state.error = action.payload || 'Ошибка при регистрации';
       })
-      // Логин пользователя
-      .addCase(loginUser.pending, (state) => {
+
+      // Логин
+      .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
+      .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
+        state.isAuthChecked = true;
         state.loading = false;
-        state.error = action.payload || 'Ошибка при входе';
       })
-      // Получение информации о пользователе
-      .addCase(fetchUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchUser.fulfilled, (state, action) => {
+      .addCase(login.rejected, (state, action) => {
+        // Приводим action.payload к строке, так как rejectWithValue возвращает строку
+        state.error = (action.payload as string) || 'Ошибка при логине';
         state.loading = false;
-        state.user = action.payload;
-        state.isAuthenticated = true;
       })
-      .addCase(fetchUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error =
-          action.payload || 'Ошибка при получении данных пользователя';
-      })
-      // Выход пользователя
-      .addCase(logoutUser.fulfilled, (state) => {
+
+      // Логаут
+      .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.isAuthenticated = false;
+        state.isAuthChecked = true;
+      })
+
+      // Получение пользователя
+      .addCase(getUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthenticated = true;
+        state.loading = false;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.error =
+          action.error.message || 'Ошибка при получении данных пользователя';
+        state.isAuthenticated = false;
+        state.loading = false;
+      })
+      // Обновление пользователя
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.loading = false;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.error =
+          action.error.message || 'Ошибка при обновлении данных пользователя';
+        state.loading = false;
+      })
+
+      // Проверка токена (checkUserAuth)
+      .addCase(checkUserAuth.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(checkUserAuth.fulfilled, (state) => {
+        state.loading = false;
+        state.isAuthChecked = true;
       });
   }
 });
 
-export const { reducer: userReducer } = userSlice;
-export const getUserState = (state: RootState): UserState => state.user;
+export const { setUser, setIsAuthChecked } = authSlice.actions;
+export const userReducer = authSlice.reducer;
+export const getUserState = (state: RootState) => state.user;

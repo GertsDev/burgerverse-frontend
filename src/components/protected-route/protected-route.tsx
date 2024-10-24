@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
-import { Preloader } from '../ui/preloader';
 import { getUserState } from '../../services/slices/userSlice';
+import { Preloader } from '@ui';
 
 type ProtectedRouteProps = {
   onlyAuthorized?: boolean;
@@ -9,21 +9,23 @@ type ProtectedRouteProps = {
 
 export const ProtectedRoute = ({ onlyAuthorized }: ProtectedRouteProps) => {
   const location = useLocation();
-  const { isAuthChecked, isAuthenticated, loading } = useSelector(getUserState);
+  const { isAuthenticated, isAuthChecked } = useSelector(getUserState);
 
-  console.log(isAuthChecked, isAuthenticated);
-
-  if (loading || !isAuthChecked) {
+  // Пока авторизация не проверена, показываем прелоадер
+  if (!isAuthChecked) {
     return <Preloader />;
   }
 
-  if (onlyAuthorized === false && isAuthenticated) {
+  // Если маршрут не требует авторизации, но пользователь авторизован, редиректим на главную страницу
+  if (!onlyAuthorized && isAuthenticated) {
     return <Navigate replace to='/' />;
   }
 
-  if (onlyAuthorized === true && !isAuthenticated) {
+  // Если маршрут требует авторизации, но пользователь не авторизован, редиректим на страницу логина
+  if (onlyAuthorized && !isAuthenticated) {
     return <Navigate replace to='/login' state={{ from: location }} />;
   }
 
+  // Если все условия соблюдены, рендерим дочерние компоненты через <Outlet />
   return <Outlet />;
 };

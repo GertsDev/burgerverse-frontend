@@ -7,7 +7,5 @@ export const AppHeader: FC = () => {
   const { user } = useSelector(getUserState);
   const userName = user ? user.name : '';
 
-  console.log(userName); // Выводим имя пользователя в консоль
-
   return <AppHeaderUI userName={userName} />; // Передаем имя пользователя в компонент UI
 };
