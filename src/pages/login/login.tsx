@@ -10,6 +10,7 @@ export const Login: FC = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { isAuthenticated, error } = useSelector(getUserState);
+  const [attemptedLogin, setAttemptedLogin] = useState(false); // Состояние для отслеживания попытки входа
   const location = useLocation();
 
   // Получаем откуда пришел пользователь
@@ -18,6 +19,7 @@ export const Login: FC = () => {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    setAttemptedLogin(true);
     try {
       // Ждем завершения логина
       await dispatch(login({ email, password })).unwrap();
@@ -31,9 +33,11 @@ export const Login: FC = () => {
     return <Navigate to={from} replace />;
   }
 
+  const errorMessage = attemptedLogin ? error : '';
+
   return (
     <LoginUI
-      errorText={error || ''}
+      errorText={errorMessage || ''}
       email={email}
       setEmail={setEmail}
       password={password}

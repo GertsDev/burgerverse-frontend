@@ -1,11 +1,13 @@
-import { orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TOrder } from '@utils-types';
 import { RootState } from 'src/services/store';
 
 interface orderState {
   order: TOrder | null;
+  getOrderByNumberResponse: TOrder | null;
   loading: boolean;
+  request: boolean;
   error: string | null;
 }
 
@@ -21,9 +23,16 @@ export const placeOrder = createAsyncThunk<TOrder, string[]>(
   }
 );
 
+export const getOrderByNumber = createAsyncThunk(
+  'order/byNumber',
+  async (number: number) => getOrderByNumberApi(number)
+);
+
 const initialState: orderState = {
   order: null,
+  getOrderByNumberResponse: null,
   loading: false,
+  request: false,
   error: null
 };
 
@@ -51,6 +60,19 @@ export const orderSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       });
+    builder.addCase(getOrderByNumber.pending, (state) => {
+      state.error = null;
+      state.request = true;
+    });
+    builder.addCase(getOrderByNumber.rejected, (state, action) => {
+      state.error = action.error.message as string;
+      state.request = false;
+    });
+    builder.addCase(getOrderByNumber.fulfilled, (state, action) => {
+      state.error = null;
+      state.request = false;
+      state.getOrderByNumberResponse = action.payload.orders[0];
+    });
   }
 });
 

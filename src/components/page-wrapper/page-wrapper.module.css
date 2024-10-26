@@ -1,0 +1,14 @@
+/* page-wrapper.module.css */
+.wrapper {
+    margin: 120px auto; /* Отступ сверху */
+    max-width: 800px; /* Максимальная ширина */
+  }
+  
+  .title {
+    text-align: center; /* Выравнивание заголовка по центру */
+  }
+  
+  .content {
+    border-radius: 8px; /* Закругление углов, если нужно */
+  }
+  
