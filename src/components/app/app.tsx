@@ -17,6 +17,7 @@ import {
   IngredientDetails,
   Modal,
   OrderInfo,
+  PageWrapper,
   ProtectedRoute
 } from '@components';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -25,7 +26,6 @@ import { getIngredients } from '../../services/slices/ingredients-slice';
 import { useDispatch, useSelector } from '../../services/store';
 import { ImagePreloader } from '../image-preloader/image-preloader';
 import { getUserState } from '../../services/slices/userSlice';
-import { getCookie } from '../../utils/cookie';
 import { checkUserAuth } from '../../services/authActions';
 
 const App = () => {
@@ -33,7 +33,7 @@ const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const state = location.state as { background?: Location };
+  const LocationState = location.state as { background?: Location };
   const { isAuthenticated, isAuthChecked } = useSelector(getUserState);
 
   useEffect(() => {
@@ -48,12 +48,27 @@ const App = () => {
     <div className={styles.app}>
       <AppHeader />
       <ImagePreloader />
-      <Routes location={state?.background || location}>
+      <Routes location={LocationState?.background || location}>
         {/* Общедоступные маршруты */}
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route
+          path='/feed/:number'
+          element={
+            <PageWrapper paramHandle title='#'>
+              <OrderInfo />
+            </PageWrapper>
+          }
+        />
+
+        <Route
+          path='/ingredients/:id'
+          element={
+            <PageWrapper title='Детали ингредиента'>
+              <IngredientDetails />
+            </PageWrapper>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
 
         {/* Защищенные маршруты только для неавторизованных пользователей */}
@@ -68,31 +83,48 @@ const App = () => {
         <Route element={<ProtectedRoute onlyAuthorized />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/orders' element={<ProfileOrders />} />
-          <Route path='/profile/orders/:number' element={<OrderInfo />} />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <PageWrapper paramHandle title='#'>
+                <OrderInfo />
+              </PageWrapper>
+            }
+          />
         </Route>
       </Routes>
 
       {/* Модальные окна */}
-      {state?.background && (
-        <Routes>
-          <Route
-            path='/feed/:number'
-            element={
-              <Modal title='Детали заказа' onClose={() => navigate(-1)}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
-          <Route
-            path='/ingredients/:id'
-            element={
-              <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
-                <IngredientDetails />
-              </Modal>
-            }
-          />
-        </Routes>
-      )}
+      {LocationState?.background ? (
+        <>
+          <Routes>
+            <Route
+              path='/feed/:number'
+              element={
+                <Modal title='Детали заказа' onClose={() => navigate(-1)}>
+                  <OrderInfo />
+                </Modal>
+              }
+            />
+            <Route
+              path='/profile/orders/:number'
+              element={
+                <Modal title='Детали заказа' onClose={() => navigate(-1)}>
+                  <OrderInfo />
+                </Modal>
+              }
+            />
+            <Route
+              path='/ingredients/:id'
+              element={
+                <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
+                  <IngredientDetails />
+                </Modal>
+              }
+            />
+          </Routes>
+        </>
+      ) : null}
     </div>
   );
 };
