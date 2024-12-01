@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "111",
+      "name": "Булка",
+      "type": "bun",
+      "proteins": 12,
+      "fat": 33,
+      "carbohydrates": 22,
+      "calories": 33,
+      "price": 123,
+      "image": "",
+      "image_large": "",
+      "image_mobile": ""
+    },
+    {
+        "_id": "111",
+        "name": "Катлета",
+        "type": "main",
+        "proteins": 12,
+        "fat": 33,
+        "carbohydrates": 22,
+        "calories": 33,
+        "price": 123,
+        "image": "",
+        "image_large": "",
+        "image_mobile": ""
+      }
+  ]
+}
