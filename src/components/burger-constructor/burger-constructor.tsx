@@ -1,24 +1,52 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
+import { useDispatch, useSelector } from '../../services/store';
+import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate
+import {
+  clearConstructor,
+  getBurgerState
+} from '../../services/slices/burger-slice';
+import {
+  clearOrder,
+  getOrderState,
+  placeOrder
+} from '../../services/slices/order-slice';
+import { getUserState } from '../../services/slices/userSlice'; // Импортируем состояние пользователя
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const constructorItems = {
-    bun: {
-      price: 0
-    },
-    ingredients: []
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Инициализируем навигацию
+  const { isAuthenticated } = useSelector(getUserState); // Получаем состояние авторизации
 
-  const orderRequest = false;
+  const constructorItems = useSelector(getBurgerState);
+  const { order, loading: orderRequest, error } = useSelector(getOrderState);
 
-  const orderModalData = null;
+  const orderModalData = order;
+
+  const { bun, ingredients } = constructorItems;
 
   const onOrderClick = () => {
+    if (!isAuthenticated) {
+      // Если пользователь не авторизован, перенаправляем на страницу логина
+      navigate('/login');
+      return;
+    }
+
     if (!constructorItems.bun || orderRequest) return;
+
+    const ingredientIds = [
+      constructorItems.bun._id,
+      ...ingredients.map((ingredient) => ingredient._id),
+      constructorItems.bun._id
+    ];
+
+    dispatch(placeOrder(ingredientIds));
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    dispatch(clearOrder());
+  };
 
   const price = useMemo(
     () =>
@@ -30,7 +58,11 @@ export const BurgerConstructor: FC = () => {
     [constructorItems]
   );
 
-  return null;
+  useEffect(() => {
+    if (order && !orderRequest && !error) {
+      dispatch(clearConstructor());
+    }
+  }, [order, orderRequest, error, dispatch]);
 
   return (
     <BurgerConstructorUI

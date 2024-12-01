@@ -15,6 +15,7 @@ export const ResetPassword: FC = () => {
     setError(null);
     resetPasswordApi({ password, token })
       .then(() => {
+        setError(null);
         localStorage.removeItem('resetPassword');
         navigate('/login');
       })
