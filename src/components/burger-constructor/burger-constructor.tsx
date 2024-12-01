@@ -26,6 +26,8 @@ export const BurgerConstructor: FC = () => {
 
   const { bun, ingredients } = constructorItems;
 
+  console.log(constructorItems);
+
   const onOrderClick = () => {
     if (!isAuthenticated) {
       // Если пользователь не авторизован, перенаправляем на страницу логина
