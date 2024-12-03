@@ -12,7 +12,7 @@ interface MoveIngredientPayload {
   toIndex: number;
 }
 
-const initialState: burgerConstructorState = {
+export const initialState: burgerConstructorState = {
   bun: null,
   ingredients: []
 };
