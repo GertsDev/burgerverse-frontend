@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'; // Импортируем useNav
 import {
   clearConstructor,
   getBurgerState
-} from '../../services/slices/burger-slice';
+} from '../../services/slices/constructorSlice';
 import {
   clearOrder,
   getOrderState,
@@ -18,7 +18,6 @@ export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Инициализируем навигацию
   const { isAuthenticated } = useSelector(getUserState); // Получаем состояние авторизации
-  console.log('isAuthenticated: ', isAuthenticated);
 
   const constructorItems = useSelector(getBurgerState);
   const { order, loading: orderRequest, error } = useSelector(getOrderState);

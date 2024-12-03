@@ -36,8 +36,6 @@ const App = () => {
   const LocationState = location.state as { background?: Location };
   const { isAuthenticated, isAuthChecked } = useSelector(getUserState);
 
-  console.log(isAuthenticated);
-
   useEffect(() => {
     dispatch(checkUserAuth());
   }, [dispatch, isAuthenticated]);

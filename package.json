@@ -87,6 +87,7 @@
     "ts-jest": "^29.2.5",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
+    "tsconfig-paths-jest": "^0.0.1",
     "url-loader": "^4.1.1"
   },
   "scripts": {
@@ -97,6 +98,7 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier ./src --write",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "cypress:open": "cypress open"
   },
   "eslintConfig": {

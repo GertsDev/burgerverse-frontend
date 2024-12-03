@@ -28,7 +28,7 @@ export const getOrderByNumber = createAsyncThunk(
   async (number: number) => getOrderByNumberApi(number)
 );
 
-const initialState: orderState = {
+export const initialState: orderState = {
   order: null,
   getOrderByNumberResponse: null,
   loading: false,

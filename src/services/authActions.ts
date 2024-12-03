@@ -46,7 +46,6 @@ export const getUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await getUserApi();
-      console.log(response);
       return response.user;
     } catch (err) {
       return rejectWithValue('Ошибка при получении данных пользователя');
@@ -89,9 +88,7 @@ export const registerUser = createAsyncThunk<
 export const checkUserAuth = createAsyncThunk(
   'auth/checkUserAuth',
   async (_, { dispatch }) => {
-    console.log('auth HERE WE GO');
     const accessToken = getCookie('accessToken');
-    console.log('accessToken' + accessToken);
     if (accessToken) {
       try {
         const userResponse = await dispatch(getUser()).unwrap();
