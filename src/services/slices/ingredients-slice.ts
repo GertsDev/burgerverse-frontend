@@ -38,12 +38,10 @@ const ingredientsSlice = createSlice({
       .addCase(getIngredients.fulfilled, (state, action) => {
         state.loading = false;
         state.ingredients = action.payload;
-        console.log(state.ingredients);
       })
       .addCase(getIngredients.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch ingredients';
-        console.log(state.error);
       });
   }
 });

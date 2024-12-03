@@ -1,0 +1,5 @@
+{
+  "success": true,
+  "refreshToken": "mockRefreshToken",
+  "accessToken": "mockAccessToken"
+}
