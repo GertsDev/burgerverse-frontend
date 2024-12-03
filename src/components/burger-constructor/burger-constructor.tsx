@@ -18,6 +18,7 @@ export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Инициализируем навигацию
   const { isAuthenticated } = useSelector(getUserState); // Получаем состояние авторизации
+  console.log('isAuthenticated: ', isAuthenticated);
 
   const constructorItems = useSelector(getBurgerState);
   const { order, loading: orderRequest, error } = useSelector(getOrderState);
@@ -25,8 +26,6 @@ export const BurgerConstructor: FC = () => {
   const orderModalData = order;
 
   const { bun, ingredients } = constructorItems;
-
-  console.log(constructorItems);
 
   const onOrderClick = () => {
     if (!isAuthenticated) {
