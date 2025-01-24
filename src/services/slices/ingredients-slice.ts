@@ -9,7 +9,7 @@ interface IngredientsState {
   error: string | null;
 }
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   ingredients: [],
   loading: false,
   error: null
@@ -32,6 +32,7 @@ const ingredientsSlice = createSlice({
     builder
       .addCase(getIngredients.pending, (state) => {
         state.loading = true;
+
         state.error = null;
       })
       .addCase(getIngredients.fulfilled, (state, action) => {
