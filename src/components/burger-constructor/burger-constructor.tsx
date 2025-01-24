@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'; // Импортируем useNav
 import {
   clearConstructor,
   getBurgerState
-} from '../../services/slices/burger-slice';
+} from '../../services/slices/constructorSlice';
 import {
   clearOrder,
   getOrderState,

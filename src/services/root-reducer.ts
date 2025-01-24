@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { ingredientsReducer } from './slices/ingredients-slice';
-import { burgerConstructorReducer } from './slices/burger-slice';
+import { burgerConstructorReducer } from './slices/constructorSlice';
 import { orderReducer } from './slices/order-slice';
 import { feedReducer } from './slices/feedsSlice';
 import { userReducer } from './slices/userSlice';
