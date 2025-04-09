@@ -20,13 +20,13 @@ import {
   PageWrapper,
   ProtectedRoute
 } from '@components';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { checkUserAuth } from '../../services/authActions';
 import { getIngredients } from '../../services/slices/ingredients-slice';
+import { getUserState } from '../../services/slices/userSlice';
 import { useDispatch, useSelector } from '../../services/store';
 import { ImagePreloader } from '../image-preloader/image-preloader';
-import { getUserState } from '../../services/slices/userSlice';
-import { checkUserAuth } from '../../services/authActions';
 
 const App = () => {
   const navigate = useNavigate();
