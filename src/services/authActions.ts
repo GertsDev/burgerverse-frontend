@@ -1,16 +1,16 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
+  getUserApi,
   loginUserApi,
   logoutApi,
-  getUserApi,
-  registerUserApi,
   refreshToken,
+  registerUserApi,
   TRegisterData,
   updateUserApi
 } from '@api';
-import { setIsAuthChecked, setUser } from './slices/userSlice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { getCookie, setCookie } from '../utils/cookie';
+import { setIsAuthChecked, setUser } from './slices/userSlice';
 
 export const login = createAsyncThunk(
   'auth/login',
