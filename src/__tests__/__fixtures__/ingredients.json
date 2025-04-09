@@ -3,7 +3,7 @@
   "data": [
     {
       "_id": "643d69a5c3f7b9001cfa093c",
-      "name": "Краторная булка N-200i",
+      "name": "Nebula N-200i Bun",
       "type": "bun",
       "proteins": 80,
       "fat": 24,
@@ -17,7 +17,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0941",
-      "name": "Биокотлета из марсианской Магнолии",
+      "name": "Mars Magnolia Patty",
       "type": "main",
       "proteins": 420,
       "fat": 142,
@@ -31,7 +31,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa093e",
-      "name": "Филе Люминесцентного тетраодонтимформа",
+      "name": "Glow-Fish Fillet",
       "type": "main",
       "proteins": 44,
       "fat": 26,
@@ -45,7 +45,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0942",
-      "name": "Соус Spicy-X",
+      "name": "Sauce Spicy-X",
       "type": "sauce",
       "proteins": 30,
       "fat": 20,
@@ -59,7 +59,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0943",
-      "name": "Соус фирменный Space Sauce",
+      "name": "Cosmic House Sauce",
       "type": "sauce",
       "proteins": 50,
       "fat": 22,
@@ -73,7 +73,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa093f",
-      "name": "Мясо бессмертных моллюсков Protostomia",
+      "name": "Everlasting Mollusk Steak",
       "type": "main",
       "proteins": 433,
       "fat": 244,
@@ -87,7 +87,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0940",
-      "name": "Говяжий метеорит (отбивная)",
+      "name": "Meteor Steak Smash",
       "type": "main",
       "proteins": 800,
       "fat": 800,
@@ -101,7 +101,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa093d",
-      "name": "Флюоресцентная булка R2-D3",
+      "name": "R2-D3 Glow Bun",
       "type": "bun",
       "proteins": 44,
       "fat": 26,
@@ -115,7 +115,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0944",
-      "name": "Соус традиционный галактический",
+      "name": "Classic Galaxy Drizzle",
       "type": "sauce",
       "proteins": 42,
       "fat": 24,
@@ -129,7 +129,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0945",
-      "name": "Соус с шипами Антарианского плоскоходца",
+      "name": "Antarian Spike Sauce",
       "type": "sauce",
       "proteins": 101,
       "fat": 99,
@@ -143,7 +143,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0946",
-      "name": "Хрустящие минеральные кольца",
+      "name": "Astro-Crisp Rings",
       "type": "main",
       "proteins": 808,
       "fat": 689,
@@ -157,7 +157,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0947",
-      "name": "Плоды Фалленианского дерева",
+      "name": "Fallenian Star Pods",
       "type": "main",
       "proteins": 20,
       "fat": 5,
@@ -171,7 +171,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0948",
-      "name": "Кристаллы марсианских альфа-сахаридов",
+      "name": "Red Planet Rock Candy",
       "type": "main",
       "proteins": 234,
       "fat": 432,
@@ -185,7 +185,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa0949",
-      "name": "Мини-салат Экзо-Плантаго",
+      "name": "Exo-Greens Micro Mix",
       "type": "main",
       "proteins": 1,
       "fat": 2,
@@ -199,7 +199,7 @@
     },
     {
       "_id": "643d69a5c3f7b9001cfa094a",
-      "name": "Сыр с астероидной плесенью",
+      "name": "Asteroid Blue Cheese",
       "type": "main",
       "proteins": 84,
       "fat": 48,
