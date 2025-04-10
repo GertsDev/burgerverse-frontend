@@ -57,7 +57,7 @@ module.exports = {
     }),
     new Dotenv(),
     new webpack.DefinePlugin({
-      'process.env.BURGER_API_URL': JSON.stringify(process.env.REACT_APP_BURGER_API_URL)
+      'process.env.BURGER_API_URL': JSON.stringify(process.env.BURGER_API_URL)
     })
   ],
   resolve: {
