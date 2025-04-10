@@ -2,6 +2,7 @@ import { getCookie, setCookie } from './cookie';
 import { TIngredient, TOrder, TUser } from './types';
 
 const URL = process.env.REACT_APP_BURGER_API_URL;
+const NEW_URL = process.env.REACT_APP_NEW_BURGER_API_URL;
 console.debug('Process.env:', process.env);
 
 const checkResponse = <T>(res: Response): Promise<T> =>
@@ -73,7 +74,7 @@ type TOrdersResponse = TServerResponse<{
 }>;
 
 export const getIngredientsApi = () =>
-  fetch(`${URL}/ingredients`)
+  fetch(`${NEW_URL}/ingredients`)
     .then((res) => checkResponse<TIngredientsResponse>(res))
     .then((data) => {
       if (data?.success) return data.data;
