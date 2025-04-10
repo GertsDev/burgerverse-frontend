@@ -2,8 +2,8 @@ import { getCookie, setCookie } from './cookie';
 import { TIngredient, TOrder, TUser } from './types';
 
 const URL = process.env.BURGER_API_URL;
-console.log(URL);
-
+console.log('URL', URL); // https://g-grabbackend-production.up.railway.app/api
+console.debug('Process.env:', process.env);
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
