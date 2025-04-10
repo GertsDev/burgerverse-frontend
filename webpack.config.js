@@ -55,12 +55,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new Dotenv(),
-    new webpack.DefinePlugin({
-      'process.env.REACT_APP_BURGER_API_URL': JSON.stringify(
-        process.env.REACT_APP_BURGER_API_URL
-      )
+    new Dotenv({
+      systemvars: true
     })
+    // new webpack.DefinePlugin({
+    //   'process.env.REACT_APP_BURGER_API_URL': JSON.stringify(
+    //     process.env.REACT_APP_BURGER_API_URL
+    //   )
+    // })
   ],
   resolve: {
     extensions: [
