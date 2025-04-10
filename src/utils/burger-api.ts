@@ -2,6 +2,7 @@ import { getCookie, setCookie } from './cookie';
 import { TIngredient, TOrder, TUser } from './types';
 
 const URL = process.env.REACT_APP_BURGER_API_URL;
+console.log(URL);
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
