@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './order-details.module.css';
 import doneImg from '../../../images/done.svg';
+import styles from './order-details.module.css';
 import { OrderDetailsUIProps } from './type';
 
 export const OrderDetailsUI: React.FC<OrderDetailsUIProps> = ({
@@ -13,17 +13,13 @@ export const OrderDetailsUI: React.FC<OrderDetailsUIProps> = ({
     >
       {orderNumber}
     </h2>
-    <p className='text text_type_main-medium'>идентификатор заказа</p>
-    <img
-      className={styles.img}
-      src={doneImg}
-      alt='изображение статуса заказа.'
-    />
+    <p className='text text_type_main-medium'>Space Order ID</p>
+    <img className={styles.img} src={doneImg} alt='order status image' />
     <p className='text text_type_main-default mb-1'>
-      Ваш заказ начали готовить
+      Your space burger is being prepared
     </p>
     <p className={`${styles.text} text text_type_main-default`}>
-      Дождитесь готовности на орбитальной станции
+      Await completion at the orbital station
     </p>
   </>
 );

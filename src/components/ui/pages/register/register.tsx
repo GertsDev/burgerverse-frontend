@@ -20,7 +20,9 @@ export const RegisterUI: FC<RegisterUIProps> = ({
 }) => (
   <main className={styles.container}>
     <div className={`pt-6 ${styles.wrapCenter}`}>
-      <h3 className='pb-6 text text_type_main-medium'>Регистрация</h3>
+      <h3 className='pb-6 text text_type_main-medium'>
+        Space Burger Registration
+      </h3>
       <form
         className={`pb-15 ${styles.form}`}
         name='register'
@@ -30,7 +32,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
           <div className='pb-6'>
             <Input
               type='text'
-              placeholder='Имя'
+              placeholder='Space Commander Name'
               onChange={(e) => setUserName(e.target.value)}
               value={userName}
               name='name'
@@ -44,7 +46,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
           <div className='pb-6'>
             <Input
               type='email'
-              placeholder='E-mail'
+              placeholder='Space Email'
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               name='email'
@@ -64,7 +66,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
           </div>
           <div className={`pb-6 ${styles.button}`}>
             <Button type='primary' size='medium' htmlType='submit'>
-              Зарегистрироваться
+              Join the Space Burger Crew
             </Button>
           </div>
           {errorText && (

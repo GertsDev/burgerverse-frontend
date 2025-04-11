@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
-import { OrderStatusProps } from './type';
 import { OrderStatusUI } from '@ui';
+import { FC } from 'react';
+import { OrderStatusProps } from './type';
 
 const statusText: { [key: string]: string } = {
-  pending: 'Готовится',
-  done: 'Выполнен',
-  created: 'Создан'
+  pending: 'Cooking in Space',
+  done: 'Mission Complete',
+  created: 'Order Launched'
 };
 
 export const OrderStatus: FC<OrderStatusProps> = ({ status }) => {

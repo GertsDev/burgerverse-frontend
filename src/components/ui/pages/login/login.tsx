@@ -18,7 +18,7 @@ export const LoginUI: FC<LoginUIProps> = ({
 }) => (
   <main className={styles.container}>
     <div className={`pt-6 ${styles.wrapCenter}`}>
-      <h3 className='pb-6 text text_type_main-medium'>Вход</h3>
+      <h3 className='pb-6 text text_type_main-medium'>Space Burger Login</h3>
       <form
         className={`pb-15 ${styles.form}`}
         name='login'
@@ -28,7 +28,7 @@ export const LoginUI: FC<LoginUIProps> = ({
           <div className='pb-6'>
             <Input
               type='email'
-              placeholder='E-mail'
+              placeholder='Enter your space email'
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               name='email'
@@ -48,7 +48,7 @@ export const LoginUI: FC<LoginUIProps> = ({
           </div>
           <div className={`pb-6 ${styles.button}`}>
             <Button type='primary' size='medium' htmlType='submit'>
-              Войти
+              Launch into Space Burger
             </Button>
           </div>
           {errorText && (
@@ -59,9 +59,9 @@ export const LoginUI: FC<LoginUIProps> = ({
         </>
       </form>
       <div className={`pb-4 ${styles.question} text text_type_main-default`}>
-        Вы - новый пользователь?
+        New to Space Burger?
         <Link to='/register' className={`pl-2 ${styles.link}`}>
-          Зарегистрироваться
+          Join
         </Link>
       </div>
       <div className={`${styles.question} text text_type_main-default pb-6`}>
