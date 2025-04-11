@@ -53,16 +53,29 @@ module.exports = {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      title: 'Stellar Burger - Cosmic Burger Joint',
+      meta: {
+        description:
+          'Create your own custom cosmic burger and place orders at this interplanetary burger joint',
+        keywords: 'burger, cosmic, space, food, delivery, custom burger',
+        author: 'Your Name',
+        'og:title': 'Stellar Burger - Cosmic Burger Joint',
+        'og:description':
+          'Build your own custom cosmic burger and place orders from anywhere in the galaxy',
+        'og:type': 'website',
+        'og:url': 'https://www.stellarburger.com',
+        'og:image': 'https://www.stellarburger.com/og-image.jpg',
+        'twitter:card': 'summary_large_image',
+        'twitter:title': 'Stellar Burger - Cosmic Burger Joint',
+        'twitter:description':
+          'Build your own custom cosmic burger and place orders from anywhere in the galaxy'
+      },
+      favicon: './public/favicon.ico'
     }),
     new Dotenv({
       systemvars: true
     })
-    // new webpack.DefinePlugin({
-    //   'process.env.REACT_APP_BURGER_API_URL': JSON.stringify(
-    //     process.env.REACT_APP_BURGER_API_URL
-    //   )
-    // })
   ],
   resolve: {
     extensions: [
