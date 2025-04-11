@@ -2,6 +2,18 @@
   "name": "react-canonical",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "webpack serve --mode=development",
+    "build": "webpack --mode=production",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier ./src --write",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "cypress:open": "cypress open"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -89,18 +101,6 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths-jest": "^0.0.1",
     "url-loader": "^4.1.1"
-  },
-  "scripts": {
-    "start": "webpack serve --mode=development",
-    "build": "webpack --mode=production",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier ./src --write",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
