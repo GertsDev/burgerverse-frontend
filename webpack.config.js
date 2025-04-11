@@ -2,6 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
@@ -52,9 +53,29 @@ module.exports = {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      title: 'Burgerverse - Cosmic Burger Joint',
+      meta: {
+        description:
+          'Create your own custom cosmic burger and place orders at this interplanetary burger joint',
+        keywords: 'burger, cosmic, space, food, delivery, custom burger',
+        author: 'Kirill Gerts',
+        'og:title': 'Burgerverse - Cosmic Burger Joint',
+        'og:description':
+          'Build your own custom cosmic burger and place orders from anywhere in the galaxy',
+        'og:type': 'website',
+        'og:url': 'https://www.stellarburger.com',
+        'og:image': 'https://www.stellarburger.com/og-image.jpg',
+        'twitter:card': 'summary_large_image',
+        'twitter:title': 'Burgerverse - Cosmic Burger Joint',
+        'twitter:description':
+          'Build your own custom cosmic burger and place orders from anywhere in the galaxy'
+      },
+      favicon: './public/favicon.ico'
     }),
-    new Dotenv()
+    new Dotenv({
+      systemvars: true
+    })
   ],
   resolve: {
     extensions: [
