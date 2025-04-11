@@ -1,6 +1,6 @@
 import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { TConstructorIngredient, TOrder } from '@utils-types';
+import { TOrder } from '@utils-types';
 import { RootState } from 'src/services/store';
 
 interface orderState {

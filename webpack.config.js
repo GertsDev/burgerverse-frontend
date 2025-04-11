@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 
-module.exports = {
+module.exports = (env, argv) => ({
   entry: path.resolve(__dirname, './src/index.tsx'),
   module: {
     rules: [
@@ -74,6 +74,7 @@ module.exports = {
       favicon: './public/favicon.ico'
     }),
     new Dotenv({
+      path: argv.mode === 'development' ? '.env.development' : '.env',
       systemvars: true
     })
   ],
@@ -112,4 +113,4 @@ module.exports = {
     historyApiFallback: true,
     port: 4000
   }
-};
+});

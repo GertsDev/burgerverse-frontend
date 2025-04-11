@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TUser } from '@utils-types';
 import {
+  checkUserAuth,
+  getUser,
   login,
   logout,
-  getUser,
   registerUser,
-  checkUserAuth,
   updateUser
 } from '../authActions';
-import { TUser } from '@utils-types';
 import { RootState } from '../store';
 
 type TAuthState = {
@@ -52,7 +52,8 @@ export const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.error = action.error.message || 'Ошибка при регистрации';
+        state.error =
+          action.payload || action.error.message || 'Ошибка при регистрации';
         state.loading = false;
       })
 

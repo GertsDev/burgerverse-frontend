@@ -3,7 +3,15 @@ import { TIngredient, TOrder, TUser } from './types';
 
 const URL = process.env.REACT_APP_BURGER_API_URL;
 const NEW_URL = process.env.REACT_APP_NEW_BURGER_API_URL;
-console.debug('Process.env:', process.env);
+const REAL_URL = process.env.REAL_BURGER_API_URL;
+
+// Helper to determine which URL to use for auth routes
+const getAuthUrl = () => {
+  if (process.env.NODE_ENV === 'development' && REAL_URL) {
+    return REAL_URL;
+  }
+  return URL;
+};
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -18,7 +26,7 @@ type TRefreshResponse = TServerResponse<{
 }>;
 
 export const refreshToken = (): Promise<TRefreshResponse> =>
-  fetch(`${URL}/auth/token`, {
+  fetch(`${getAuthUrl()}/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -146,7 +154,7 @@ type TAuthResponse = TServerResponse<{
 }>;
 
 export const registerUserApi = (data: TRegisterData) =>
-  fetch(`${URL}/auth/register`, {
+  fetch(`${getAuthUrl()}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -165,7 +173,7 @@ export type TLoginData = {
 };
 
 export const loginUserApi = (data: TLoginData) =>
-  fetch(`${URL}/auth/login`, {
+  fetch(`${getAuthUrl()}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -179,7 +187,7 @@ export const loginUserApi = (data: TLoginData) =>
     });
 
 export const forgotPasswordApi = (data: { email: string }) =>
-  fetch(`${URL}/password-reset`, {
+  fetch(`${getAuthUrl()}/password-reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -193,7 +201,7 @@ export const forgotPasswordApi = (data: { email: string }) =>
     });
 
 export const resetPasswordApi = (data: { password: string; token: string }) =>
-  fetch(`${URL}/password-reset/reset`, {
+  fetch(`${getAuthUrl()}/password-reset/reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -209,14 +217,16 @@ export const resetPasswordApi = (data: { password: string; token: string }) =>
 type TUserResponse = TServerResponse<{ user: TUser }>;
 
 export const getUserApi = () =>
-  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
+  fetchWithRefresh<TUserResponse>(`${getAuthUrl()}/auth/user`, {
+    method: 'GET',
     headers: {
+      'Content-Type': 'application/json;charset=utf-8',
       authorization: getCookie('accessToken')
     } as HeadersInit
   });
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
-  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
+  fetchWithRefresh<TUserResponse>(`${getAuthUrl()}/auth/user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -226,7 +236,7 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
   });
 
 export const logoutApi = () =>
-  fetch(`${URL}/auth/logout`, {
+  fetch(`${getAuthUrl()}/auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -234,4 +244,9 @@ export const logoutApi = () =>
     body: JSON.stringify({
       token: localStorage.getItem('refreshToken')
     })
-  }).then((res) => checkResponse<TServerResponse<{}>>(res));
+  })
+    .then((res) => checkResponse<TServerResponse<{}>>(res))
+    .then((data) => {
+      if (data?.success) return data;
+      return Promise.reject(data);
+    });

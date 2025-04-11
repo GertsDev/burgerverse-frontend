@@ -79,7 +79,11 @@ export const registerUser = createAsyncThunk<
     setCookie('accessToken', accessToken);
     localStorage.setItem('refreshToken', response.refreshToken);
     return response.user;
-  } catch (err) {
+  } catch (err: any) {
+    // Check if the error has a message from the server
+    if (err.message) {
+      return rejectWithValue(err.message);
+    }
     return rejectWithValue('Ошибка при регистрации');
   }
 });

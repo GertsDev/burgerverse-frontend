@@ -1,7 +1,6 @@
-import { FC, useEffect, useMemo } from 'react';
-import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useDispatch, useSelector } from '../../services/store';
+import { TConstructorIngredient } from '@utils-types';
+import { FC, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate
 import {
   clearConstructor,
@@ -13,6 +12,7 @@ import {
   placeOrder
 } from '../../services/slices/order-slice';
 import { getUserState } from '../../services/slices/userSlice'; // Импортируем состояние пользователя
+import { useDispatch, useSelector } from '../../services/store';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
