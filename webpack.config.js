@@ -54,20 +54,20 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      title: 'Stellar Burger - Cosmic Burger Joint',
+      title: 'Burgerverse - Cosmic Burger Joint',
       meta: {
         description:
           'Create your own custom cosmic burger and place orders at this interplanetary burger joint',
         keywords: 'burger, cosmic, space, food, delivery, custom burger',
-        author: 'Your Name',
-        'og:title': 'Stellar Burger - Cosmic Burger Joint',
+        author: 'Kirill Gerts',
+        'og:title': 'Burgerverse - Cosmic Burger Joint',
         'og:description':
           'Build your own custom cosmic burger and place orders from anywhere in the galaxy',
         'og:type': 'website',
         'og:url': 'https://www.stellarburger.com',
         'og:image': 'https://www.stellarburger.com/og-image.jpg',
         'twitter:card': 'summary_large_image',
-        'twitter:title': 'Stellar Burger - Cosmic Burger Joint',
+        'twitter:title': 'Burgerverse - Cosmic Burger Joint',
         'twitter:description':
           'Build your own custom cosmic burger and place orders from anywhere in the galaxy'
       },
