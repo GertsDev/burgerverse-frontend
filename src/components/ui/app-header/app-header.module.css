@@ -35,3 +35,28 @@
   align-items: center;
   margin: 0 auto;
 }
+
+.logo a {
+  text-decoration: none;
+}
+
+.logo_image {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.logo_text {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text-primary-color);
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}

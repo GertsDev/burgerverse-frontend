@@ -48,7 +48,7 @@ export const LoginUI: FC<LoginUIProps> = ({
           </div>
           <div className={`pb-6 ${styles.button}`}>
             <Button type='primary' size='medium' htmlType='submit'>
-              Launch into Space Burger
+              Login
             </Button>
           </div>
           {errorText && (
@@ -59,15 +59,15 @@ export const LoginUI: FC<LoginUIProps> = ({
         </>
       </form>
       <div className={`pb-4 ${styles.question} text text_type_main-default`}>
-        New to Space Burger?
+        New to Burgerverse?
         <Link to='/register' className={`pl-2 ${styles.link}`}>
           Join
         </Link>
       </div>
       <div className={`${styles.question} text text_type_main-default pb-6`}>
-        Забыли пароль?
+        Forgot your password?
         <Link to={'/forgot-password'} className={`pl-2 ${styles.link}`}>
-          Восстановить пароль
+          Recover
         </Link>
       </div>
     </div>

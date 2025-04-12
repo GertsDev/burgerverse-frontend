@@ -108,7 +108,7 @@ module.exports = (env, argv) => ({
     filename: 'bundle.js'
   },
   devServer: {
-    static: path.join(__dirname, './dist'),
+    static: [path.join(__dirname, './dist'), path.join(__dirname, './public')],
     compress: true,
     historyApiFallback: true,
     port: 4000

@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 
 import styles from './feed-info.module.css';
 
@@ -13,13 +13,13 @@ export const FeedInfoUI: FC<FeedInfoUIProps> = memo(
         <div className={styles.columns}>
           <HalfColumn
             orders={readyOrders}
-            title={'Готовы'}
+            title={'Ready for Launch'}
             textColor={'blue'}
           />
-          <HalfColumn orders={pendingOrders} title={'В работе'} />
+          <HalfColumn orders={pendingOrders} title={'In Progress'} />
         </div>
-        <Column title={'Выполнено за все время'} content={total} />
-        <Column title={'Выполнено за сегодня'} content={totalToday} />
+        <Column title={'Total Orders Completed'} content={total} />
+        <Column title={'Orders Completed Today'} content={totalToday} />
       </section>
     );
   }

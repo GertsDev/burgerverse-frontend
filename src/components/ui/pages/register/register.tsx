@@ -77,9 +77,9 @@ export const RegisterUI: FC<RegisterUIProps> = ({
         </>
       </form>
       <div className={`${styles.question} text text_type_main-default pb-6`}>
-        Уже зарегистрированы?
+        Already part of the Space Crew?
         <Link to='/login' className={`pl-2 ${styles.link}`}>
-          Войти
+          Launch In
         </Link>
       </div>
     </div>

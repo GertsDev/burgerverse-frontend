@@ -1,6 +1,5 @@
-import React from 'react';
-import { OrderStatusUI } from '@ui';
 import type { Meta, StoryObj } from '@storybook/react';
+import { OrderStatusUI } from '@ui';
 
 const meta = {
   title: 'Example/OrderStatus',
@@ -26,6 +25,6 @@ type Story = StoryObj<typeof meta>;
 export const DefaultOrderStatus: Story = {
   args: {
     textStyle: '#E52B1A',
-    text: 'Готовится'
+    text: 'In Progress'
   }
 };

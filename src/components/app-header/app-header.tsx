@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { AppHeaderUI } from '@ui';
+import { FC } from 'react';
 import { getUserState } from '../../services/slices/userSlice';
 import { useSelector } from '../../services/store';
 

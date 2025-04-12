@@ -53,7 +53,7 @@ describe('Application functionality tests', function () {
         [randomBun, randomMain, randomSauce].forEach((ingredient) => {
           cy.get(`[data-cy="ingredient-${ingredient._id}"]`)
             .find('button')
-            .contains('Добавить')
+            .contains('Add to Constructor')
             .click();
         });
 
@@ -129,7 +129,7 @@ describe('Application functionality tests', function () {
           [staticBun, staticMain, staticSauce].forEach((ingredient) => {
             cy.get(`[data-cy="ingredient-${ingredient._id}"]`)
               .find('button')
-              .contains('Добавить')
+              .contains('Add to Constructor')
               .click();
           });
 

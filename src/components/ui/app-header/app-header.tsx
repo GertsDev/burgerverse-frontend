@@ -1,19 +1,17 @@
-import React, { FC } from 'react';
-import styles from './app-header.module.css';
-import { TAppHeaderUIProps } from './type';
 import {
   BurgerIcon,
   ListIcon,
-  Logo,
   ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import styles from './app-header.module.css';
+import { TAppHeaderUIProps } from './type';
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
     <nav className={`${styles.menu} p-4`}>
       <div className={styles.menu_part_left}>
-        {/* Конструктор */}
+        {/* Space Builder */}
         <NavLink
           to='/'
           className={({ isActive }) =>
@@ -23,10 +21,12 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           <BurgerIcon
             type={window.location.pathname === '/' ? 'primary' : 'secondary'}
           />
-          <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
+          <p className='text text_type_main-default ml-2 mr-10'>
+            Space Builder
+          </p>
         </NavLink>
 
-        {/* Лента заказов */}
+        {/* Order Feed */}
         <NavLink
           to='/feed'
           className={({ isActive }) =>
@@ -40,18 +40,26 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
                 : 'secondary'
             }
           />
-          <p className='text text_type_main-default ml-2'>Лента заказов</p>
+          <p className='text text_type_main-default ml-2'>Order Feed</p>
         </NavLink>
       </div>
 
-      {/* Логотип */}
+      {/* Logo */}
       <div className={styles.logo}>
         <NavLink to='/'>
-          <Logo className='' />
+          <div className={styles.logo_container}>
+            <span className={styles.logo_text}>BURGER</span>
+            <img
+              src='/burgerverse_logo.png'
+              alt='Burgerverse Logo'
+              className={styles.logo_image}
+            />
+            <span className={styles.logo_text}>VERSE</span>
+          </div>
         </NavLink>
       </div>
 
-      {/* Профиль */}
+      {/* Profile */}
       <NavLink
         to='/profile'
         className={({ isActive }) =>
@@ -64,7 +72,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           }
         />
         <p className='text text_type_main-default ml-2'>
-          {userName || 'Личный кабинет'}
+          {userName || 'Space Profile'}
         </p>
       </NavLink>
     </nav>

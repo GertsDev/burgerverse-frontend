@@ -1,4 +1,6 @@
-# Zero-G Burger 🍔
+# 🍔 BurgerVerse - Space Builder Platform
+
+BurgerVerse is a modern web application that allows users to create and customize their perfect space burger while exploring a unique cosmic dining experience.
 
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat&logo=react)](https://reactjs.org/)
 [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.0.1-764ABC?style=flat&logo=redux)](https://redux-toolkit.js.org/)
@@ -9,13 +11,13 @@
 
 ## 🚀 Live Demo
 
-Visit [Stellar Burger](https://www.stellarburger.com) to try it out!
+Visit [BurgerVerse](https://www.BurgerVerse.space) to try it out!
 
 ## ✨ Features
 
-- 🔐 **User Authentication**: Register, login, forgot password, profile management
-- 🍔 **Custom Burger Builder**: Drag-and-drop interface to create your perfect burger
+- 🍔 **Interactive Space Burger Builder**
 - 🛒 **Order Management**: Place orders and track them in real-time
+- 🔐 **User Authentication**: Register, login, forgot password, profile management
 - 📱 **Responsive Design**: Works on desktop and mobile devices
 - 🌓 **Accessibility**: Built with a11y in mind
 
@@ -55,8 +57,24 @@ npm start
 - `npm run format` - Format code with Prettier
 
 ## 📂 Project Structure
-
 ```
+burgerverse/
+├── 📁 src/
+│ ├── components/
+│ │ ├── app-header/ # Container components
+│ │ └── ui/ # Presentational components
+│ ├── pages/ # Route pages
+│ ├── services/
+│ │ ├── slices/ # Redux slices
+│ │ └── selectors/ # Redux selectors
+│ ├── utils/
+│ │ └── types/ # TypeScript types
+│ └── styles/ # Global styles
+├── 📁 public/ # Static assets
+├── 📁 .storybook/ # Storybook configuration
+└── 📁 cypress/ # E2E tests
+
+
 src/
 ├── components/     # UI components
 ├── pages/          # Application pages
@@ -66,6 +84,25 @@ src/
 ├── stories/        # Storybook stories
 ├── __tests__/      # Test files
 └── index.tsx       # Application entry point
+```
+## 📚 Component Architecture
+
+We follow the Container/Presentational pattern:
+- **Container Components**: Handle logic and data
+- **Presentational Components**: Pure rendering with props
+
+Example:
+```typescript
+// Container Component (app-header.tsx)
+const AppHeader: FC = () => {
+  const { user } = useSelector(getUserState);
+  return <AppHeaderUI userName={user.name} />;
+};
+
+// Presentational Component (ui/app-header.tsx)
+const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
+  <header>...</header>
+);
 ```
 
 ## 🔒 Authentication

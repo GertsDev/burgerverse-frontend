@@ -1,9 +1,9 @@
-import React, { FC, memo } from 'react';
 import { Tab } from '@zlden/react-developer-burger-ui-components';
+import { FC, memo } from 'react';
 
+import { IngredientsCategory } from '@components';
 import styles from './burger-ingredients.module.css';
 import { BurgerIngredientsUIProps } from './type';
-import { IngredientsCategory } from '@components';
 
 export const BurgerIngredientsUI: FC<BurgerIngredientsUIProps> = memo(
   ({
@@ -24,39 +24,39 @@ export const BurgerIngredientsUI: FC<BurgerIngredientsUIProps> = memo(
         <nav>
           <ul className={styles.menu}>
             <Tab value='bun' active={currentTab === 'bun'} onClick={onTabClick}>
-              Булки
+              Buns
             </Tab>
             <Tab
               value='main'
               active={currentTab === 'main'}
               onClick={onTabClick}
             >
-              Начинки
+              Fillings
             </Tab>
             <Tab
               value='sauce'
               active={currentTab === 'sauce'}
               onClick={onTabClick}
             >
-              Соусы
+              Sauces
             </Tab>
           </ul>
         </nav>
         <div className={styles.content}>
           <IngredientsCategory
-            title='Булки'
+            title='Stellar Buns'
             titleRef={titleBunRef}
             ingredients={buns}
             ref={bunsRef}
           />
           <IngredientsCategory
-            title='Начинки'
+            title='Cosmic Fillings'
             titleRef={titleMainRef}
             ingredients={mains}
             ref={mainsRef}
           />
           <IngredientsCategory
-            title='Соусы'
+            title='Space Sauces'
             titleRef={titleSaucesRef}
             ingredients={sauces}
             ref={saucesRef}

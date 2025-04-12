@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import styles from './constructor-page.module.css';
 
-import { ConstructorPageUIProps } from './type';
+import { BurgerConstructor, BurgerIngredients } from '@components';
 import { Preloader } from '@ui';
-import { BurgerIngredients, BurgerConstructor } from '@components';
+import { ConstructorPageUIProps } from './type';
 
 export const ConstructorPageUI: FC<ConstructorPageUIProps> = ({
   isIngredientsLoading
@@ -17,7 +17,7 @@ export const ConstructorPageUI: FC<ConstructorPageUIProps> = ({
         <h1
           className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}
         >
-          Соберите бургер
+          Build Your Cosmic Burger
         </h1>
         <div className={`${styles.main} pl-5 pr-5`}>
           <BurgerIngredients />

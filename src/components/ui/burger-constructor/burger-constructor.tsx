@@ -24,7 +24,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         <ConstructorElement
           type='top'
           isLocked
-          text={`${constructorItems.bun.name} (верх)`}
+          text={`${constructorItems.bun.name} (up)`}
           price={constructorItems.bun.price}
           thumbnail={constructorItems.bun.image}
         />
@@ -33,7 +33,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       <div
         className={`${styles.noBuns} ${styles.noBunsTop} ml-8 mb-4 mr-5 text text_type_main-default`}
       >
-        Выберите булки
+        Choose Your Buns
       </div>
     )}
     <ul className={styles.elements}>
@@ -52,7 +52,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         <div
           className={`${styles.noBuns} ml-8 mb-4 mr-5 text text_type_main-default`}
         >
-          Выберите начинку
+          Add Your Fillings
         </div>
       )}
     </ul>
@@ -61,7 +61,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         <ConstructorElement
           type='bottom'
           isLocked
-          text={`${constructorItems.bun.name} (низ)`}
+          text={`${constructorItems.bun.name} (down)`}
           price={constructorItems.bun.price}
           thumbnail={constructorItems.bun.image}
         />
@@ -70,7 +70,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       <div
         className={`${styles.noBuns} ${styles.noBunsBottom} ml-8 mb-4 mr-5 text text_type_main-default`}
       >
-        Выберите булки
+        Choose Your Buns
       </div>
     )}
     <div className={`${styles.total} mt-10 mr-4`}>
@@ -82,13 +82,13 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         htmlType='button'
         type='primary'
         size='large'
-        children='Оформить заказ'
+        children='Launch Your Order'
         onClick={onOrderClick}
       />
     </div>
 
     {orderRequest && (
-      <Modal onClose={closeOrderModal} title={'Оформляем заказ...'}>
+      <Modal onClose={closeOrderModal} title={'Preparing Your Cosmic Order...'}>
         <Preloader />
       </Modal>
     )}
@@ -96,7 +96,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
     {orderModalData && (
       <Modal
         onClose={closeOrderModal}
-        title={orderRequest ? 'Оформляем заказ...' : ''}
+        title={orderRequest ? 'Preparing Your Cosmic Order...' : ''}
       >
         <OrderDetailsUI orderNumber={orderModalData.number} />
       </Modal>
