@@ -1,13 +1,9 @@
+import { useDispatch } from '@redux-store';
+import { fetchUserOrders, getUserOrdersState } from '@slices/userOrdersSlice';
+import { Preloader } from '@ui';
 import { ProfileOrdersUI } from '@ui-pages';
-import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  fetchUserOrders,
-  getUserOrdersState
-} from '../../services/slices/userOrdersSlice';
-import { useDispatch } from '../../services/store';
-import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();

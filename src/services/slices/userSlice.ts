@@ -1,3 +1,4 @@
+import { RootState } from '@redux-store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import {
@@ -8,7 +9,6 @@ import {
   registerUser,
   updateUser
 } from '../authActions';
-import { RootState } from '../store';
 
 type TAuthState = {
   user: TUser | null;

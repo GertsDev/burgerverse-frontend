@@ -16,17 +16,23 @@
     "noEmit": false,
     "jsx": "react-jsx",
     "types": ["node", "jest"],
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "src/*": ["src/*"],
-      "@pages": ["src/pages"],
-      "@components": ["src/components"],
-      "@ui": ["src/components/ui"],
-      "@ui-pages": ["src/components/ui/pages"],
-      "@utils-types": ["src/utils/types"],
-      "@api": ["src/utils/burger-api.ts"],
-      "@slices": ["src/services/slices"],
-      "@selectors": ["src/services/selectors"]
+      "@api/*": ["utils/api/*"],
+      "@components/*": ["components/*"],
+      "@components": ["components/index.ts"],
+      "@ui/*": ["components/ui/*"],
+      "@ui": ["components/ui/index.ts"],
+      "@pages/*": ["pages/*"],
+      "@pages": ["pages/index.ts"],
+      "@ui-pages/*": ["components/ui/pages/*"],
+      "@ui-pages": ["components/ui/pages/index.ts"],
+      "@slices/*": ["services/slices/*"],
+      "@selectors/*": ["services/selectors/*"],
+      "@utils-types": ["utils/types.ts"],
+      "@utils-cookie": ["utils/cookie.ts"],
+      "@api-helpers": ["utils/api/helpers.ts"],
+      "@redux-store": ["services/store.ts"]
     }
   },
   "include": ["src"]

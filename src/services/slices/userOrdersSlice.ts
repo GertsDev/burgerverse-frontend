@@ -1,7 +1,7 @@
-import { getOrdersApi } from '@api';
+import { getOrdersApi } from '@api/orders-api';
+import { RootState } from '@redux-store';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { RootState } from '../store';
 
 interface UserOrdersState {
   orders: TOrder[];

@@ -1,7 +1,7 @@
-import { FC, SyntheticEvent, useState } from 'react';
+import { useDispatch, useSelector } from '@redux-store';
+import { getUserState } from '@slices/userSlice';
 import { RegisterUI } from '@ui-pages';
-import { useDispatch, useSelector } from '../../services/store';
-import { getUserState } from '../../services/slices/userSlice';
+import { FC, SyntheticEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { registerUser } from '../../services/authActions';
 

@@ -1,7 +1,7 @@
-import { getOrderByNumberApi, orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '@api/orders-api';
+import { RootState } from '@redux-store';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { RootState } from 'src/services/store';
 
 interface orderState {
   order: TOrder | null;

@@ -1,6 +1,6 @@
+import { RootState } from '@redux-store';
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
-import { RootState } from 'src/services/store';
 
 interface burgerConstructorState {
   bun: null | TConstructorIngredient;
