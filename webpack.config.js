@@ -1,29 +1,28 @@
+// webpack.config.js
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const webpack = require('webpack');
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 module.exports = (env, argv) => ({
-  entry: path.resolve(__dirname, './src/index.tsx'),
+  entry: path.resolve(__dirname, 'src/index.tsx'),
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.(ts)x?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'ts-loader'
-        }
+        use: ['ts-loader'],
       },
       {
         test: /\.css$/,
         exclude: /\.module\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.module\.css$/i,
@@ -32,29 +31,28 @@ module.exports = (env, argv) => ({
           'style-loader',
           {
             loader: 'css-loader',
-            options: {
-              modules: true
-            }
-          }
-        ]
+            options: { modules: true },
+          },
+        ],
       },
       {
         test: /\.(jpg|jpeg|png|svg)$/,
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2)$/,
-        type: 'asset/resource'
-      }
-    ]
+        type: 'asset/resource',
+      },
+    ],
   },
   plugins: [
     new ESLintPlugin({
-      extensions: ['.js', '.jsx', '.ts', '.tsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       title: 'Burgerverse - Cosmic Burger Joint',
+      favicon: './public/favicon.ico',
       meta: {
         description:
           'Create your own custom cosmic burger and place orders at this interplanetary burger joint',
@@ -69,18 +67,18 @@ module.exports = (env, argv) => ({
         'twitter:card': 'summary_large_image',
         'twitter:title': 'Burgerverse - Cosmic Burger Joint',
         'twitter:description':
-          'Build your own custom cosmic burger and place orders from anywhere in the galaxy'
+          'Build your own custom cosmic burger and place orders from anywhere in the galaxy',
       },
-      favicon: './public/favicon.ico'
     }),
     new Dotenv({
-      path: argv.mode === 'development' ? '.env.development' : '.env',
-      systemvars: true
-    })
+      path: argv.mode === 'development'
+        ? '.env.development'
+        : '.env',
+      systemvars: true,
+    }),
   ],
   resolve: {
     extensions: [
-      '*',
       '.js',
       '.jsx',
       '.ts',
@@ -90,36 +88,25 @@ module.exports = (env, argv) => ({
       '.scss',
       '.png',
       '.svg',
-      '.jpg'
+      '.jpg',
     ],
-    alias: {
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@ui': path.resolve(__dirname, './src/components/ui'),
-      '@ui-pages': path.resolve(__dirname, './src/components/ui/pages'),
-      '@utils-types': path.resolve(__dirname, './src/utils/types.ts'),
-      '@utils-cookie': path.resolve(__dirname, './src/utils/cookie.ts'),
-      '@api-helpers': path.resolve(__dirname, './src/utils/api/helpers.ts'),
-      '@api/*': path.resolve(__dirname, './src/utils/api/*'),
-      '@slices': path.resolve(__dirname, './src/services/slices'),
-      '@selectors': path.resolve(__dirname, './src/services/selectors'),
-      '@redux-store': path.resolve(__dirname, 'src/services/store'),
-      '@components/*': path.resolve(__dirname, './src/components/*'),
-      '@ui/*': path.resolve(__dirname, './src/components/ui/*'),
-      '@pages/*': path.resolve(__dirname, './src/pages/*'),
-      '@ui-pages/*': path.resolve(__dirname, './src/components/ui/pages/*'),
-      '@slices/*': path.resolve(__dirname, './src/services/slices/*'),
-      '@selectors/*': path.resolve(__dirname, './src/services/selectors/*')
-    }
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(__dirname, 'tsconfig.json'),
+      }),
+    ],
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
   devServer: {
-    static: [path.join(__dirname, './dist'), path.join(__dirname, './public')],
+    static: [
+      path.join(__dirname, 'dist'),
+      path.join(__dirname, 'public'),
+    ],
     compress: true,
     historyApiFallback: true,
-    port: 4000
-  }
+    port: 4000,
+  },
 });
