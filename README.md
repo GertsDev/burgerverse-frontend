@@ -94,11 +94,6 @@ burgerverse/
 │   │   ├── register/
 │   │   └── reset-password/
 │   ├── services/
-│   │   ├── api/
-│   │   │   ├── auth-api.ts
-│   │   │   ├── helpers.ts
-│   │   │   ├── ingredients-api.ts
-│   │   │   └── orders-api.ts
 │   │   ├── slices/
 │   │   │   ├── constructorSlice.ts
 │   │   │   ├── feedsSlice.ts
