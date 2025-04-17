@@ -1,3 +1,4 @@
+import logoUrl from '@images/burgerverse_logo.png';
 import {
   BurgerIcon,
   ListIcon,
@@ -7,6 +8,7 @@ import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './app-header.module.css';
 import { TAppHeaderUIProps } from './type';
+
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
     <nav className={`${styles.menu} p-4`}>
@@ -50,7 +52,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
           <div className={styles.logo_container}>
             <span className={styles.logo_text}>BURGER</span>
             <img
-              src='/burgerverse_logo.png'
+              src={logoUrl}
               alt='Burgerverse Logo'
               className={styles.logo_image}
             />

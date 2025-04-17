@@ -25,6 +25,7 @@
       "@ui": ["components/ui/index.ts"],
       "@pages/*": ["pages/*"],
       "@pages": ["pages/index.ts"],
+      "@images/*": ["images/*"],
       "@ui-pages/*": ["components/ui/pages/*"],
       "@ui-pages": ["components/ui/pages/index.ts"],
       "@slices/*": ["services/slices/*"],
@@ -32,7 +33,8 @@
       "@utils-types": ["utils/types.ts"],
       "@utils-cookie": ["utils/cookie.ts"],
       "@api-helpers": ["utils/api/helpers.ts"],
-      "@redux-store": ["services/store.ts"]
+      "@redux-store": ["services/store.ts"],
+
     }
   },
   "include": ["src"]

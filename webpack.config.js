@@ -4,7 +4,6 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => ({
   entry: path.resolve(__dirname, 'src/index.tsx'),
@@ -74,15 +73,6 @@ module.exports = (env, argv) => ({
     new Dotenv({
       path: argv.mode === 'development' ? '.env.development' : '.env',
       systemvars: true
-    }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'public'),
-          to: path.resolve(__dirname, 'dist'),
-          globOptions: { ignore: ['**/index.html'] }
-        }
-      ]
     })
   ],
   resolve: {
