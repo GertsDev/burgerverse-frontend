@@ -57,41 +57,115 @@ npm start
 - `npm run format` - Format code with Prettier
 
 ## 📂 Project Structure
+
 ```
 burgerverse/
-├── 📁 src/
-│ ├── components/
-│ │ ├── app-header/ # Container components
-│ │ └── ui/ # Presentational components
-│ ├── pages/ # Route pages
-│ ├── services/
-│ │ ├── slices/ # Redux slices
-│ │ └── selectors/ # Redux selectors
-│ ├── utils/
-│ │ └── types/ # TypeScript types
-│ └── styles/ # Global styles
-├── 📁 public/ # Static assets
-├── 📁 .storybook/ # Storybook configuration
-└── 📁 cypress/ # E2E tests
-
-
-src/
-├── components/     # UI components
-├── pages/          # Application pages
-├── services/       # Redux store, slices, and actions
-├── utils/          # Utility functions and API calls
-├── images/         # Static images
-├── stories/        # Storybook stories
-├── __tests__/      # Test files
-└── index.tsx       # Application entry point
+├── src/
+│   ├── components/
+│   │   ├── app-header/
+│   │   ├── burger-constructor/
+│   │   ├── burger-constructor-element/
+│   │   ├── burger-ingredient/
+│   │   ├── burger-ingredients/
+│   │   ├── feed-info/
+│   │   ├── image-preloader/
+│   │   ├── ingredient-details/
+│   │   ├── ingredients-category/
+│   │   ├── modal/
+│   │   ├── modal-overlay/
+│   │   ├── order-card/
+│   │   ├── order-info/
+│   │   ├── order-status/
+│   │   ├── orders-list/
+│   │   ├── page-wrapper/
+│   │   ├── profile-menu/
+│   │   ├── protected-route/
+│   │   ├── ui/
+│   │   └── app/
+│   ├── images/
+│   ├── pages/
+│   │   ├── constructor-page/
+│   │   ├── feed/
+│   │   ├── forgot-password/
+│   │   ├── login/
+│   │   ├── not-fount-404/
+│   │   ├── profile/
+│   │   ├── profile-orders/
+│   │   ├── register/
+│   │   └── reset-password/
+│   ├── services/
+│   │   ├── api/
+│   │   │   ├── auth-api.ts
+│   │   │   ├── helpers.ts
+│   │   │   ├── ingredients-api.ts
+│   │   │   └── orders-api.ts
+│   │   ├── slices/
+│   │   │   ├── constructorSlice.ts
+│   │   │   ├── feedsSlice.ts
+│   │   │   ├── ingredients-slice.ts
+│   │   │   ├── order-slice.ts
+│   │   │   ├── userOrdersSlice.ts
+│   │   │   └── userSlice.ts
+│   │   ├── authActions.ts
+│   │   ├── root-reducer.ts
+│   │   └── store.ts
+│   ├── stories/
+│   │   ├── assets/
+│   │   ├── BurgerConstructor.stories.ts
+│   │   ├── BurgerConstructorElement.stories.ts
+│   │   ├── BurgerIngredient.stories.tsx
+│   │   ├── Configure.mdx
+│   │   ├── FeedInfo.stories.ts
+│   │   ├── Header.stories.ts
+│   │   ├── IngredientDetails.stories.ts
+│   │   ├── OrderCard.stories.ts
+│   │   ├── OrderDetails.stories.tsx
+│   │   ├── OrderInfo.stories.ts
+│   │   ├── OrderStatus.stories.tsx
+│   │   ├── Preloader.stories.ts
+│   │   └── ProfileMenu.stories.ts
+│   ├── utils/
+│   │   ├── api/
+│   │   │   ├── auth-api.ts
+│   │   │   ├── helpers.ts
+│   │   │   ├── ingredients-api.ts
+│   │   │   └── orders-api.ts
+│   │   ├── cookie.ts
+│   │   ├── jest-utils.ts
+│   │   └── types.ts
+│   ├── __tests__/
+│   │   ├── __fixtures__/
+│   │   └── reducers/
+│   ├── styles.d.ts
+│   ├── index.css
+│   └── index.tsx
+├── public/
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── .storybook/
+│   ├── main.ts
+│   ├── preview.tsx
+│   └── storybook-config-entry.js
+├── cypress/
+│   ├── e2e/
+│   │   └── constructor.cy.tsx
+│   ├── fixtures/
+│   ├── support/
+│   ├── utils/
+│   └── tsconfig.json
 ```
+
 ## 📚 Component Architecture
 
 We follow the Container/Presentational pattern:
+
 - **Container Components**: Handle logic and data
 - **Presentational Components**: Pure rendering with props
 
 Example:
+
 ```typescript
 // Container Component (app-header.tsx)
 const AppHeader: FC = () => {
@@ -105,9 +179,63 @@ const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
 );
 ```
 
-## 🔒 Authentication
+## 🔒 Authentication & API Integration
 
-The application implements a JWT-based authentication flow with access and refresh tokens. Protected routes require authentication, and the app handles token refreshing seamlessly.
+The application uses JWT-based authentication with access and refresh tokens. All endpoints return JSON. CORS is enabled for `http://localhost:3000`.
+
+### Backend API Overview
+
+| Endpoint                | Method | Auth Required | Description               |
+| ----------------------- | ------ | ------------- | ------------------------- |
+| `/auth/register`        | POST   | No            | Register new user         |
+| `/auth/login`           | POST   | No            | Login user                |
+| `/auth/logout`          | POST   | Yes           | Logout user               |
+| `/auth/user`            | GET    | Yes           | Get current user info     |
+| `/auth/user`            | PATCH  | Yes           | Update user info          |
+| `/password-reset`       | POST   | No            | Request password reset    |
+| `/password-reset/reset` | POST   | No            | Reset password with token |
+| `/auth/token`           | POST   | No            | Refresh access token      |
+
+**Authentication Flow:**
+
+- On login/register, backend returns:
+  - `accessToken` (JWT, short-lived, sent in `Authorization` header)
+  - `refreshToken` (long-lived, stored in localStorage)
+- Use `accessToken` for authenticated requests.
+- If `accessToken` expires, use `refreshToken` to get a new one (`/auth/token`).
+- The frontend stores `accessToken` in cookies for requests.
+- `refreshToken` is stored in localStorage.
+
+**Error responses:** `{ success: false, message: "Error message" }`
+
+**Request/Response Example:**
+See `src/services/api/auth-api.ts` for expected payloads.
+
+## 🧑‍💻 Backend Structure (for reference)
+
+```
+backend/
+└── src/
+    ├── index.ts
+    ├── db.ts
+    ├── config/
+    │   └── auth.ts
+    ├── initialData/
+    │   ├── seed.ts
+    │   ├── seedIngredients.ts
+    │   └── ingredientsData.ts
+    ├── middleware/
+    │   └── authMiddleware.ts
+    ├── models/
+    │   ├── Counter.ts
+    │   ├── Order.ts
+    │   ├── Ingredient.ts
+    │   └── User.ts
+    └── routes/
+        ├── ingredients.ts
+        ├── orders.ts
+        └── auth.ts
+```
 
 ## 🎨 UI/UX
 
