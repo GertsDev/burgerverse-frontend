@@ -4,6 +4,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => ({
   entry: path.resolve(__dirname, 'src/index.tsx'),
@@ -12,17 +13,17 @@ module.exports = (env, argv) => ({
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader']
       },
       {
         test: /\.(ts)x?$/,
         exclude: /node_modules/,
-        use: ['ts-loader'],
+        use: ['ts-loader']
       },
       {
         test: /\.css$/,
         exclude: /\.module\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.module\.css$/i,
@@ -31,23 +32,23 @@ module.exports = (env, argv) => ({
           'style-loader',
           {
             loader: 'css-loader',
-            options: { modules: true },
-          },
-        ],
+            options: { modules: true }
+          }
+        ]
       },
       {
         test: /\.(jpg|jpeg|png|svg)$/,
-        type: 'asset/resource',
+        type: 'asset/resource'
       },
       {
         test: /\.(woff|woff2)$/,
-        type: 'asset/resource',
-      },
-    ],
+        type: 'asset/resource'
+      }
+    ]
   },
   plugins: [
     new ESLintPlugin({
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -67,15 +68,22 @@ module.exports = (env, argv) => ({
         'twitter:card': 'summary_large_image',
         'twitter:title': 'Burgerverse - Cosmic Burger Joint',
         'twitter:description':
-          'Build your own custom cosmic burger and place orders from anywhere in the galaxy',
-      },
+          'Build your own custom cosmic burger and place orders from anywhere in the galaxy'
+      }
     }),
     new Dotenv({
-      path: argv.mode === 'development'
-        ? '.env.development'
-        : '.env',
-      systemvars: true,
+      path: argv.mode === 'development' ? '.env.development' : '.env',
+      systemvars: true
     }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public'),
+          to: path.resolve(__dirname, 'dist'),
+          globOptions: { ignore: ['**/index.html'] }
+        }
+      ]
+    })
   ],
   resolve: {
     extensions: [
@@ -88,25 +96,22 @@ module.exports = (env, argv) => ({
       '.scss',
       '.png',
       '.svg',
-      '.jpg',
+      '.jpg'
     ],
     plugins: [
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, 'tsconfig.json'),
-      }),
-    ],
+        configFile: path.resolve(__dirname, 'tsconfig.json')
+      })
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   devServer: {
-    static: [
-      path.join(__dirname, 'dist'),
-      path.join(__dirname, 'public'),
-    ],
+    static: [path.join(__dirname, 'dist'), path.join(__dirname, 'public')],
     compress: true,
     historyApiFallback: true,
-    port: 4000,
-  },
+    port: 4000
+  }
 });
