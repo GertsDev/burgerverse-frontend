@@ -4,7 +4,7 @@
 import { setCookie } from '@utils-cookie';
 
 // API base URLs
-export const AUTH_URL = process.env.REACT_APP_BURGER_API_URL;
+export const AUTH_URL = process.env.REACT_APP_BGVERSE_API_URL;
 export const BGVERSE_URL = process.env.REACT_APP_BGVERSE_API_URL;
 
 // Generic server response type
