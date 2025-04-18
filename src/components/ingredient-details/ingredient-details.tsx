@@ -1,16 +1,16 @@
+import { useDispatch, useSelector } from '@redux-store';
+import { IngredientDetailsUI } from '@ui/ingredient-details';
+import { Preloader } from '@ui/preloader';
+import { TIngredient } from '@utils-types';
 import { FC, useEffect } from 'react';
-import { Preloader } from '../ui/preloader';
-import { IngredientDetailsUI } from '../ui/ingredient-details';
+import { useParams } from 'react-router-dom';
 import {
   getIngredients,
   getIngredientState
 } from '../../services/slices/ingredients-slice';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../services/store';
-import { TIngredient } from '@utils-types';
 
 export const IngredientDetails: FC = () => {
-  /** TODO: взять переменную из стора */
+  /** TODO: get variable from store */
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -30,12 +30,12 @@ export const IngredientDetails: FC = () => {
   if (loading) {
     return <Preloader />;
   } else if (error) {
-    return <p>Ошибка при загрузке ингредиентов:{error}</p>;
+    return <p>Error loading ingredients: {error}</p>;
   }
 
   return ingredientData ? (
     <IngredientDetailsUI ingredientData={ingredientData} />
   ) : (
-    <p>Ингредиент не найден</p>
+    <p>Ingredient not found</p>
   );
 };

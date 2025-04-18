@@ -79,10 +79,9 @@ import { Order } from '../models/Order';
 const router = Router();
 
 // POST /api/in-progress
-router.post('/in-progress', async (req, res) => {
-  const { name, ingredients, number } = req.body;
-  const order = await InProgressOrder.create({ name, ingredients, number });
-  res.json({ success: true, order });
+router.get('/in-progress', async (req, res) => {
+  const orders = await InProgressOrder.find().sort({ createdAt: -1 });
+  res.json({ success: true, orders });
 });
 
 // GET /api/in-progress

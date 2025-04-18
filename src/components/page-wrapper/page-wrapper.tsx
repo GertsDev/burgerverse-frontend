@@ -1,19 +1,19 @@
 import { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from './page-wrapper.module.css';
 import { PageWrapperProps } from './type';
-import { useParams } from 'react-router-dom';
 
 export const PageWrapper: FC<PageWrapperProps> = ({
   title,
   paramHandle,
   children
 }) => {
-  const { number } = useParams(); // Извлекаем номер заказа из параметров URL
+  const { number } = useParams(); // Extract order number from URL params
 
-  // Проверяем наличие флага paramHandle
+  // Check for paramHandle flag
   const displayTitle = paramHandle && number ? `#${number}` : title;
 
-  // Устанавливаем класс в зависимости от наличия paramHandle
+  // Set class depending on paramHandle
   const titleClass = paramHandle
     ? `text text_type_digits-medium ${styles.title}`
     : `text text_type_main-medium ${styles.title}`;
@@ -21,7 +21,7 @@ export const PageWrapper: FC<PageWrapperProps> = ({
   return (
     <div className={styles.wrapper}>
       <h2 className={titleClass}>{displayTitle}</h2>
-      {/* Отображаем переданный контент */}
+      {/* Render passed content */}
       {children}
     </div>
   );

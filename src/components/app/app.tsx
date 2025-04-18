@@ -49,7 +49,7 @@ const App = () => {
       <AppHeader />
       <ImagePreloader />
       <Routes location={LocationState?.background || location}>
-        {/* Общедоступные маршруты */}
+        {/* Public routes */}
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route
@@ -64,14 +64,14 @@ const App = () => {
         <Route
           path='/ingredients/:id'
           element={
-            <PageWrapper title='Детали ингредиента'>
+            <PageWrapper title='Ingredient details'>
               <IngredientDetails />
             </PageWrapper>
           }
         />
         <Route path='*' element={<NotFound404 />} />
 
-        {/* Защищенные маршруты только для неавторизованных пользователей */}
+        {/* Protected routes for unauthorized users only */}
         <Route element={<ProtectedRoute onlyAuthorized={false} />}>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
@@ -79,7 +79,7 @@ const App = () => {
           <Route path='/reset-password' element={<ResetPassword />} />
         </Route>
 
-        {/* Защищенные маршруты только для авторизованных пользователей */}
+        {/* Protected routes for authorized users only */}
         <Route element={<ProtectedRoute onlyAuthorized />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/orders' element={<ProfileOrders />} />
@@ -94,7 +94,7 @@ const App = () => {
         </Route>
       </Routes>
 
-      {/* Модальные окна */}
+      {/* Modals */}
       {LocationState?.background ? (
         <>
           <Routes>
@@ -117,7 +117,7 @@ const App = () => {
             <Route
               path='/ingredients/:id'
               element={
-                <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
+                <Modal title='Ingredient details' onClose={() => navigate(-1)}>
                   <IngredientDetails />
                 </Modal>
               }
