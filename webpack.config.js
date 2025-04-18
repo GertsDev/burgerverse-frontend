@@ -52,7 +52,7 @@ module.exports = (env, argv) => ({
     new HtmlWebpackPlugin({
       template: './public/index.html',
       title: 'Burgerverse - Cosmic Burger Joint',
-      favicon: './public/favicon.ico',
+      favicon: './public/burgerverse_logo.ico',
       meta: {
         description:
           'Create your own custom cosmic burger and place orders at this interplanetary burger joint',
