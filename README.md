@@ -9,9 +9,10 @@ BurgerVerse is a modern web application that allows users to create and customiz
 [![Express.js](https://img.shields.io/badge/Express.js-Server-000000?style=flat&logo=express)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?style=flat&logo=mongodb)](https://www.mongodb.com/)
 
-## 🚀 Live Demo
+## 🚀 Live Demo and Backend
 
-Visit [BurgerVerse](https://www.BurgerVerse.space) to try it out!
+Live: [BurgerVerse](https://www.BurgerVerse.space) to try it out!
+Backend repo: [BurgerVerse-backend](https://github.com/GertsDev/burgerverse-backend)
 
 ## ✨ Features
 
