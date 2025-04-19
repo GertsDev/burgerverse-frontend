@@ -12,6 +12,7 @@ BurgerVerse is a modern web application that allows users to create and customiz
 ## 🚀 Live Demo and Backend
 
 Live: [BurgerVerse](https://www.BurgerVerse.space) to try it out!
+
 Backend repo: [BurgerVerse-backend](https://github.com/GertsDev/burgerverse-backend)
 
 ## ✨ Features
