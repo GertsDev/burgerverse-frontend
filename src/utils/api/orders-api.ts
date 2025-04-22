@@ -53,7 +53,7 @@ export const getFeedsApi = () =>
 
 // Get all orders for the current user (requires auth)
 export const getOrdersApi = () =>
-  fetchWithRefresh<TFeedsResponse>(`${BGVERSE_URL}/orders`, {
+  fetchWithRefresh<TFeedsResponse>(`${BGVERSE_URL}/orders/my`, {
     method: 'GET',
     headers: {
       authorization: getCookie('accessToken')
