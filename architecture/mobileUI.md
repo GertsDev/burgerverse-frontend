@@ -10,10 +10,41 @@ This guide summarizes the current front-end architecture, CSS system, and best p
 
 ### Component Structure
 
-- **Feature-based folders:** Each UI feature (e.g., burger-constructor, modal, order-card) is in its own directory under `src/components`.
-- **UI Directory:** The `ui/` folder contains presentational components that are siblings to their container components. Each UI component is focused solely on rendering and receives all data and event handlers via props. The corresponding container component (outside `ui/`) is responsible for data fetching, state management, and business logic, and passes the necessary props down to the UI component. This pattern ensures a clear separation of concerns: containers manage logic and data, while UI components handle display. This is not a strict atomic design system, but rather a container/presenter (smart/dumb) component pattern that supports maintainability and testability.
-- **Presentational Focus:** Most components are stateless and focused on rendering, with logic separated or minimal.
-- **Re-exports:** Each folder typically has an `index.ts` for clean imports.
+- **Pages:**
+
+  - Located in `/src/pages/[feature]/index.tsx` (or similar).
+  - Serve as route entry points.
+  - Typically minimal, just import and render a component (container or UI), but may contain some logic for simple cases.
+
+- **Components (Container/Smart):**
+
+  - Located in `/src/components/[feature]/[feature].tsx` (or similar).
+  - Handle data fetching, state management, and business logic.
+  - Pass all necessary data and event handlers as props to UI components.
+  - Sometimes called “container” or “smart” components.
+
+- **UI/Presentational Components:**
+
+  - Located in `/src/components/ui/[feature]/[feature].tsx`.
+  - Focused solely on rendering the UI.
+  - Receive all data and handlers via props.
+  - Contain no business logic or data fetching.
+  - Highly reusable and easy to test.
+
+- **Feature-based folders:**
+
+  - Each UI feature (e.g., burger-constructor, modal, order-card) is in its own directory under `src/components` and `src/pages` as appropriate.
+
+- **Re-exports:**
+
+  - Each folder typically has an `index.ts` for clean imports.
+
+- **Data & Props Flow:**
+
+  - The Page component renders a Component (container/smart), which manages logic and passes data/handlers to the UI component for rendering.
+
+- **Benefits:**
+  - This pattern ensures a clear separation of concerns, improves maintainability, testability, and reusability of UI components.
 
 ### CSS System
 
