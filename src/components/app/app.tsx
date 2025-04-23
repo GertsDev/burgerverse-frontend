@@ -1,3 +1,8 @@
+// src/components/App.tsx
+
+import { useEffect } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+
 import {
   ConstructorPage,
   Feed,
@@ -9,8 +14,6 @@ import {
   Register,
   ResetPassword
 } from '@pages';
-import '../../index.css';
-import styles from './app.module.css';
 
 import {
   AppHeader,
@@ -20,35 +23,49 @@ import {
   PageWrapper,
   ProtectedRoute
 } from '@components';
+import { ImagePreloader } from '../image-preloader/image-preloader';
+
 import { getIngredients } from '@slices/ingredients-slice';
 import { getUserState } from '@slices/userSlice';
-import { useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { checkUserAuth } from '../../services/authActions';
 import { useDispatch, useSelector } from '../../services/store';
-import { ImagePreloader } from '../image-preloader/image-preloader';
+
+import '../../index.css';
+import styles from './app.module.css';
 
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const LocationState = location.state as { background?: Location };
+  // We use location.state.background to know if we should render a modal
+  const background = (location.state as { background?: Location })?.background;
+
+  // Read auth flags from Redux
   const { isAuthenticated, isAuthChecked } = useSelector(getUserState);
 
+  // 1) Check auth only once on mount (remove isAuthenticated from deps)
   useEffect(() => {
     dispatch(checkUserAuth());
-  }, [dispatch, isAuthenticated]);
+  }, [dispatch]); // ← changed: only dispatch, no isAuthenticated
 
+  // 2) Fetch ingredients once on mount
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
+
+  // 3) Optionally: while we haven't finished the auth check, show a spinner
+  if (!isAuthChecked) {
+    return <ImagePreloader />; // or your own <Preloader />
+  }
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <ImagePreloader />
-      <Routes location={LocationState?.background || location}>
+
+      {/* The main routes. If background is set, we render these in the “page behind” */}
+      <Routes location={background || location}>
         {/* Public routes */}
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
@@ -60,7 +77,6 @@ const App = () => {
             </PageWrapper>
           }
         />
-
         <Route
           path='/ingredients/:id'
           element={
@@ -71,7 +87,7 @@ const App = () => {
         />
         <Route path='*' element={<NotFound404 />} />
 
-        {/* Protected routes for unauthorized users only */}
+        {/* Unauthenticated‑only routes */}
         <Route element={<ProtectedRoute onlyAuthorized={false} />}>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
@@ -79,7 +95,7 @@ const App = () => {
           <Route path='/reset-password' element={<ResetPassword />} />
         </Route>
 
-        {/* Protected routes for authorized users only */}
+        {/* Authenticated‑only routes */}
         <Route element={<ProtectedRoute onlyAuthorized />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/orders' element={<ProfileOrders />} />
@@ -94,37 +110,35 @@ const App = () => {
         </Route>
       </Routes>
 
-      {/* Modals */}
-      {LocationState?.background ? (
-        <>
-          <Routes>
-            <Route
-              path='/feed/:number'
-              element={
-                <Modal title='#' onClose={() => navigate(-1)}>
-                  <OrderInfo />
-                </Modal>
-              }
-            />
-            <Route
-              path='/profile/orders/:number'
-              element={
-                <Modal title='#' onClose={() => navigate(-1)}>
-                  <OrderInfo />
-                </Modal>
-              }
-            />
-            <Route
-              path='/ingredients/:id'
-              element={
-                <Modal title='Ingredient details' onClose={() => navigate(-1)}>
-                  <IngredientDetails />
-                </Modal>
-              }
-            />
-          </Routes>
-        </>
-      ) : null}
+      {/* If background is set, show these routes as modals on top */}
+      {background && (
+        <Routes>
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal title='#' onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal title='#' onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title='Ingredient details' onClose={() => navigate(-1)}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 };

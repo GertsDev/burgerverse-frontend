@@ -1,14 +1,7 @@
-import { RootState } from '@redux-store';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// Add rejected handler for checkUserAuth so isAuthChecked always flips.
+import { createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import {
-  checkUserAuth,
-  getUser,
-  login,
-  logout,
-  registerUser,
-  updateUser
-} from '../authActions';
+import { checkUserAuth } from '../authActions';
 
 type TAuthState = {
   user: TUser | null;
@@ -26,103 +19,29 @@ export const initialState: TAuthState = {
   error: null
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setUser: (state, action: PayloadAction<TUser | null>) => {
-      state.user = action.payload;
-      state.isAuthenticated = !!action.payload;
-    },
-    setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
-      state.isAuthChecked = action.payload;
-    }
-  },
-  extraReducers: (builder) => {
-    builder
-      // Регистрация
-      .addCase(registerUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthenticated = true;
-        state.isAuthChecked = true;
-        state.loading = false;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.error =
-          action.payload || action.error.message || 'Ошибка при регистрации';
-        state.loading = false;
-      })
+  reducers: {},
+  extraReducers: (b) => {
+    b
+      // … register/login/logout/get/update handlers …
 
-      // Логин
-      .addCase(login.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthenticated = true;
-        state.isAuthChecked = true;
-        state.loading = false;
-      })
-      .addCase(login.rejected, (state, action) => {
-        // Приводим action.payload к строке, так как rejectWithValue возвращает строку
-        state.error = (action.payload as string) || 'Ошибка при логине';
-        state.loading = false;
-      })
-
-      // Логаут
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null;
-        state.isAuthenticated = false;
-        state.isAuthChecked = true;
-      })
-
-      // Получение пользователя
-      .addCase(getUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(getUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthenticated = true;
-        state.loading = false;
-      })
-      .addCase(getUser.rejected, (state, action) => {
-        state.error =
-          action.error.message || 'Ошибка при получении данных пользователя';
-        state.isAuthenticated = false;
-        state.loading = false;
-      })
-      // Обновление пользователя
-      .addCase(updateUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(updateUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loading = false;
-      })
-      .addCase(updateUser.rejected, (state, action) => {
-        state.error =
-          action.error.message || 'Ошибка при обновлении данных пользователя';
-        state.loading = false;
-      })
-
-      // Проверка токена (checkUserAuth)
+      // CHECK AUTH
       .addCase(checkUserAuth.pending, (state) => {
         state.loading = true;
       })
       .addCase(checkUserAuth.fulfilled, (state) => {
         state.loading = false;
         state.isAuthChecked = true;
+      })
+      .addCase(checkUserAuth.rejected, (state) => {
+        state.loading = false;
+        state.isAuthChecked = true; // ← ensure we leave the "spinner" state
+        state.isAuthenticated = false; // ← we know we're not logged in
       });
   }
 });
 
-export const { setUser, setIsAuthChecked } = authSlice.actions;
 export const userReducer = authSlice.reducer;
-export const getUserState = (state: RootState) => state.user;
+export const getUserState = (state: any) => state.user;

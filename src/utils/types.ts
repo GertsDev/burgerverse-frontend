@@ -44,3 +44,14 @@ export type TRegisterData = {
   name: string;
   password: string;
 };
+
+export type TLoginData = {
+  email: string;
+  password: string;
+};
+
+export type TUpdateUserData = {
+  email?: string;
+  name?: string;
+  password?: string;
+};
