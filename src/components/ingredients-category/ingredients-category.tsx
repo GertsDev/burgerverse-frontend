@@ -1,9 +1,9 @@
-import { forwardRef, useMemo } from 'react';
-import { TIngredientsCategoryProps } from './type';
+import { getBurgerState } from '@slices/constructorSlice';
 import { TIngredient } from '@utils-types';
-import { IngredientsCategoryUI } from '../ui/ingredients-category';
+import { forwardRef, useMemo } from 'react';
 import { useSelector } from '../../services/store';
-import { getBurgerState } from '../../services/slices/constructorSlice';
+import { IngredientsCategoryUI } from '../ui/ingredients-category';
+import { TIngredientsCategoryProps } from './type';
 
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,

@@ -1,13 +1,11 @@
-import { FC, useEffect, useMemo } from 'react';
-import { Preloader } from '../ui/preloader';
-import { OrderInfoUI } from '../ui/order-info';
+import { getIngredientState } from '@slices/ingredients-slice';
+import { getOrderByNumber, getOrderState } from '@slices/order-slice';
 import { TIngredient } from '@utils-types';
-import { useSelector } from '../../services/store';
-import { useDispatch } from '../../services/store';
+import { FC, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { getOrderState } from '../../services/slices/order-slice';
-import { getIngredientState } from '../../services/slices/ingredients-slice';
-import { getOrderByNumber } from '../../services/slices/order-slice';
+import { useDispatch, useSelector } from '../../services/store';
+import { OrderInfoUI } from '../ui/order-info';
+import { Preloader } from '../ui/preloader';
 
 export const OrderInfo: FC = () => {
   const { getOrderByNumberResponse, request } = useSelector(getOrderState);

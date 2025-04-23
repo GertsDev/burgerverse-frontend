@@ -1,13 +1,10 @@
 import { useDispatch, useSelector } from '@redux-store';
+import { getIngredients, getIngredientState } from '@slices/ingredients-slice';
 import { IngredientDetailsUI } from '@ui/ingredient-details';
 import { Preloader } from '@ui/preloader';
 import { TIngredient } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  getIngredients,
-  getIngredientState
-} from '../../services/slices/ingredients-slice';
 
 export const IngredientDetails: FC = () => {
   /** TODO: get variable from store */

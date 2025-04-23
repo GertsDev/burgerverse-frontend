@@ -1,8 +1,8 @@
 import {
+  getIngredients,
   ingredientsReducer,
   initialState
-} from '../../services/slices/ingredients-slice';
-import { getIngredients } from '../../services/slices/ingredients-slice';
+} from '@slices/ingredients-slice';
 import ingredientsFixture from '../__fixtures__/ingredients.json';
 
 describe('ingredientsReducer', () => {

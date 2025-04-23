@@ -1,6 +1,6 @@
+import { getIngredientState } from '@slices/ingredients-slice';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getIngredientState } from '../../services/slices/ingredients-slice';
 
 // ImagePreloader preloads images as soon as ingredients are loaded to avoid delay in ingredient modal opening
 export const ImagePreloader = () => {

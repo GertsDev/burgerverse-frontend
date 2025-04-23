@@ -60,3 +60,85 @@
   text-transform: uppercase;
   font-family: 'JetBrains Mono', monospace;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .menu {
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .menu_part_left {
+    display: none; /* Hide left menu on mobile */
+  }
+
+  .logo {
+    flex: 1;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .logo_container {
+    gap: 2px;
+  }
+
+  .burger_menu_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    margin-left: auto;
+    z-index: 1002;
+  }
+
+  .burger_menu_icon {
+    font-size: 2rem;
+    color: var(--text-primary-color);
+  }
+
+  .mobile_menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    height: 100vh;
+    background: var(--background);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
+    padding: 32px 16px 16px 16px;
+    z-index: 1001;
+    transition: transform 0.2s ease;
+    transform: translateX(0);
+  }
+
+  .mobile_menu_hidden {
+    transform: translateX(100%);
+    pointer-events: none;
+  }
+
+  .mobile_menu_link {
+    margin-bottom: 24px;
+    font-size: 1.2rem;
+    color: var(--text-primary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Hide burger menu button on desktop */
+.burger_menu_button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .burger_menu_button {
+    display: flex;
+  }
+}

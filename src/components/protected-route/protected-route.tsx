@@ -1,7 +1,7 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useSelector } from '../../services/store';
-import { getUserState } from '../../services/slices/userSlice';
+import { useSelector } from '@redux-store';
+import { getUserState } from '@slices/userSlice';
 import { Preloader } from '@ui';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 type ProtectedRouteProps = {
   onlyAuthorized?: boolean;

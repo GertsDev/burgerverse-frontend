@@ -1,18 +1,11 @@
+import { useDispatch, useSelector } from '@redux-store';
+import { clearConstructor, getBurgerState } from '@slices/constructorSlice';
+import { clearOrder, getOrderState, placeOrder } from '@slices/order-slice';
+import { getUserState } from '@slices/userSlice'; // Импортируем состояние пользователя
 import { BurgerConstructorUI } from '@ui';
 import { TConstructorIngredient } from '@utils-types';
 import { FC, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate
-import {
-  clearConstructor,
-  getBurgerState
-} from '../../services/slices/constructorSlice';
-import {
-  clearOrder,
-  getOrderState,
-  placeOrder
-} from '../../services/slices/order-slice';
-import { getUserState } from '../../services/slices/userSlice'; // Импортируем состояние пользователя
-import { useDispatch, useSelector } from '../../services/store';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();

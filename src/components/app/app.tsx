@@ -20,11 +20,11 @@ import {
   PageWrapper,
   ProtectedRoute
 } from '@components';
+import { getIngredients } from '@slices/ingredients-slice';
+import { getUserState } from '@slices/userSlice';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { checkUserAuth } from '../../services/authActions';
-import { getIngredients } from '../../services/slices/ingredients-slice';
-import { getUserState } from '../../services/slices/userSlice';
 import { useDispatch, useSelector } from '../../services/store';
 import { ImagePreloader } from '../image-preloader/image-preloader';
 

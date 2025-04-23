@@ -1,6 +1,6 @@
+import { getUserState } from '@slices/userSlice';
 import { AppHeaderUI } from '@ui';
 import { FC } from 'react';
-import { getUserState } from '../../services/slices/userSlice';
 import { useSelector } from '../../services/store';
 
 export const AppHeader: FC = () => {

@@ -1,7 +1,7 @@
+import { getFeedState } from '@slices/feedsSlice';
 import { TOrder } from '@utils-types';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { getFeedState } from '../../services/slices/feedsSlice';
 import { FeedInfoUI } from '../ui/feed-info';
 
 const getOrders = (orders: TOrder[], status: string): number[] =>
