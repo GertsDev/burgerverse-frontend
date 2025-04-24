@@ -72,7 +72,7 @@ export const loginUserApi = (data: TLoginData) =>
 
 // Request password reset email
 export const forgotPasswordApi = (data: { email: string }) =>
-  fetch(`${AUTH_URL}/password-reset`, {
+  fetch(`${AUTH_URL}/auth/password-reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -87,7 +87,7 @@ export const forgotPasswordApi = (data: { email: string }) =>
 
 // Reset password with token
 export const resetPasswordApi = (data: { password: string; token: string }) =>
-  fetch(`${AUTH_URL}/password-reset/reset`, {
+  fetch(`${AUTH_URL}/auth/password-reset/reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
