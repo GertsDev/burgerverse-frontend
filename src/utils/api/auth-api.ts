@@ -1,12 +1,7 @@
 //-----------------------------------------------------------------------------
 // Authentication API: register, login, user info, update, logout, password reset
 // -----------------------------------------------------------------------------
-import {
-  AUTH_URL,
-  checkResponse,
-  fetchWithRefresh,
-  TServerResponse
-} from '@api-helpers';
+import { BGVERSE_URL, checkResponse, fetchWithRefresh, TServerResponse } from '@api-helpers';
 import { getCookie } from '@utils-cookie';
 import { TRegisterData, TUser } from '@utils-types';
 
@@ -21,7 +16,7 @@ type TAuthResponse = TServerResponse<{
 
 // Get current user info (requires auth)
 export const getUserApi = () =>
-  fetchWithRefresh<TUserResponse>(`${AUTH_URL}/auth/user`, {
+  fetchWithRefresh<TUserResponse>(`${BGVERSE_URL}/auth/user`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -31,7 +26,7 @@ export const getUserApi = () =>
 
 // Update user info (requires auth)
 export const updateUserApi = (user: Partial<TRegisterData>) =>
-  fetchWithRefresh<TUserResponse>(`${AUTH_URL}/auth/user`, {
+  fetchWithRefresh<TUserResponse>(`${BGVERSE_URL}/auth/user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -42,7 +37,7 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
 
 // Register new user
 export const registerUserApi = (data: TRegisterData) =>
-  fetch(`${AUTH_URL}/auth/register`, {
+  fetch(`${BGVERSE_URL}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -57,7 +52,7 @@ export const registerUserApi = (data: TRegisterData) =>
 
 // Login user
 export const loginUserApi = (data: TLoginData) =>
-  fetch(`${AUTH_URL}/auth/login`, {
+  fetch(`${BGVERSE_URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -72,7 +67,7 @@ export const loginUserApi = (data: TLoginData) =>
 
 // Request password reset email
 export const forgotPasswordApi = (data: { email: string }) =>
-  fetch(`${AUTH_URL}/auth/password-reset`, {
+  fetch(`${BGVERSE_URL}/auth/password-reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -87,7 +82,7 @@ export const forgotPasswordApi = (data: { email: string }) =>
 
 // Reset password with token
 export const resetPasswordApi = (data: { password: string; token: string }) =>
-  fetch(`${AUTH_URL}/auth/password-reset/reset`, {
+  fetch(`${BGVERSE_URL}/auth/password-reset/reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -102,7 +97,7 @@ export const resetPasswordApi = (data: { password: string; token: string }) =>
 
 // Logout user (invalidate refresh token)
 export const logoutApi = () =>
-  fetch(`${AUTH_URL}/auth/logout`, {
+  fetch(`${BGVERSE_URL}/auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'

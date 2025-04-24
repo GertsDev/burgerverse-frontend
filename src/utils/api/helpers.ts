@@ -4,7 +4,6 @@
 import { setCookie } from '@utils-cookie';
 
 // API base URLs
-export const AUTH_URL = process.env.REACT_APP_BGVERSE_API_URL;
 export const BGVERSE_URL = process.env.REACT_APP_BGVERSE_API_URL;
 
 // Generic server response type
@@ -24,7 +23,7 @@ export const checkResponse = <T>(res: Response): Promise<T> =>
 
 // Refreshes JWT tokens using refreshToken from localStorage
 export const refreshToken = (): Promise<TRefreshResponse> =>
-  fetch(`${AUTH_URL}/auth/token`, {
+  fetch(`${BGVERSE_URL}/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
