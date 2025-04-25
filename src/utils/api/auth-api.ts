@@ -1,7 +1,12 @@
 //-----------------------------------------------------------------------------
 // Authentication API: register, login, user info, update, logout, password reset
 // -----------------------------------------------------------------------------
-import { BGVERSE_URL, checkResponse, fetchWithRefresh, TServerResponse } from '@api-helpers';
+import {
+  BGVERSE_URL,
+  checkResponse,
+  fetchWithRefresh,
+  TServerResponse
+} from '@api-helpers';
 import { getCookie } from '@utils-cookie';
 import { TRegisterData, TUser } from '@utils-types';
 

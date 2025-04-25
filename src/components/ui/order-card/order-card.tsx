@@ -1,9 +1,7 @@
-import {
-  CurrencyIcon,
-  FormattedDate
-} from '@zlden/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@zlden/react-developer-burger-ui-components';
 import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
+import { formatDate } from 'utils/format-date';
 
 import styles from './order-card.module.css';
 
@@ -23,7 +21,7 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
           Order #{String(orderInfo.number).padStart(6, '0')}
         </span>
         <span className='text text_type_main-default text_color_inactive'>
-          <FormattedDate date={orderInfo.date} />
+          {formatDate(orderInfo.date)}
         </span>
       </div>
       <h4 className={`pt-6 text text_type_main-medium ${styles.order_name}`}>
