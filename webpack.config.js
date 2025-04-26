@@ -102,6 +102,7 @@ module.exports = (env, argv) => ({
     static: [path.join(__dirname, 'dist'), path.join(__dirname, 'public')],
     compress: true,
     historyApiFallback: true,
-    port: 4000
+    port: 4000,
+    host: '0.0.0.0'
   }
 });
