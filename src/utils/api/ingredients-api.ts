@@ -2,7 +2,7 @@
 // Ingredients API: fetch all available burger ingredients
 // -----------------------------------------------------------------------------
 
-import { BGVERSE_URL, checkResponse, TServerResponse } from '@api-helpers';
+import { BGVERSE_URL, checkResponse, TServerResponse } from '@api/helpers';
 import { TIngredient } from '@utils-types';
 
 // Type only used in this file

@@ -7,7 +7,7 @@ import {
   checkResponse,
   fetchWithRefresh,
   TServerResponse
-} from '@api-helpers';
+} from '@api/helpers';
 import { getCookie } from '@utils-cookie';
 import { TOrder } from '@utils-types';
 

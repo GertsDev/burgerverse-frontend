@@ -6,7 +6,7 @@ import {
   checkResponse,
   fetchWithRefresh,
   TServerResponse
-} from '@api-helpers';
+} from '@api/helpers';
 import { getCookie } from '@utils-cookie';
 import { TRegisterData, TUser } from '@utils-types';
 

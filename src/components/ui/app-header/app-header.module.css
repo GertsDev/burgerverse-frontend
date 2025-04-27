@@ -60,3 +60,25 @@
   text-transform: uppercase;
   font-family: 'JetBrains Mono', monospace;
 }
+
+@media (max-width: 768px) {
+  .menu {
+    justify-content: space-between;
+  }
+
+  .menu_part_left {
+    display: none;
+  }
+
+  .logo {
+    margin: 0;
+  }
+
+  .logo_text {
+    font-size: 22px;
+  }
+
+  .logo_image {
+    height: 50px;
+  }
+}

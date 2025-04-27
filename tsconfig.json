@@ -32,9 +32,8 @@
       "@selectors/*": ["services/selectors/*"],
       "@utils-types": ["utils/types.ts"],
       "@utils-cookie": ["utils/cookie.ts"],
-      "@api-helpers": ["utils/api/helpers.ts"],
       "@redux-store": ["services/store.ts"],
-
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src"]
