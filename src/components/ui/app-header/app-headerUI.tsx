@@ -6,7 +6,7 @@ import {
 } from '@zlden/react-developer-burger-ui-components';
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './app-header.module.css';
+import styles from './app-headerUI.module.css';
 import { TAppHeaderUIProps } from './type';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (

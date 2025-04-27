@@ -3,7 +3,7 @@ import {
   MoveButton
 } from '@zlden/react-developer-burger-ui-components';
 import { FC, memo } from 'react';
-import styles from './burger-constructor-element.module.css';
+import styles from './burger-constructor-elementUI.module.css';
 import { BurgerConstructorElementUIProps } from './type';
 
 export const BurgerConstructorElementUI: FC<BurgerConstructorElementUIProps> =

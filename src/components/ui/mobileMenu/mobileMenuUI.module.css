@@ -1,0 +1,51 @@
+.menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1c1c21; /* Dark background */
+  border-top: 1px solid rgba(76, 76, 255, 0.2); /* Subtle top border */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 0; /* Vertical padding */
+  z-index: 1000; /* Ensure it's above other content */
+  box-sizing: border-box;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #8585ad; /* Secondary/inactive color */
+  transition: color 0.2s ease-in-out;
+}
+
+.link_text {
+  margin-top: 4px; /* Space between icon and text */
+  font-size: 12px; /* Smaller font size for mobile */
+  line-height: 1.2;
+}
+
+/* Active link styles */
+.link_active,
+.link_active .link_text {
+  color: #f2f2f3; /* Primary/active color (lighter) */
+}
+
+/* Ensure SVG icons also change color */
+.link_active svg {
+  fill: #f2f2f3; /* Primary/active color for SVG */
+}
+
+.link:not(.link_active) svg {
+  fill: #8585ad; /* Secondary/inactive color for SVG */
+}
+
+/* Hide on larger screens - adjust breakpoint as needed */
+@media (min-width: 769px) {
+  .menu {
+    display: none;
+  }
+}

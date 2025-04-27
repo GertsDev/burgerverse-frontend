@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Button, Input } from '@zlden/react-developer-burger-ui-components';
-import commonStyles from '../common.module.css';
+import stylesCommon from '../common.module.css';
 import styles from './profile.module.css';
 
 import { ProfileMenu } from '@components';
@@ -15,12 +15,12 @@ export const ProfileUI: FC<ProfileUIProps> = ({
   handleCancel,
   handleInputChange
 }) => (
-  <main className={`${commonStyles.container}`}>
+  <main className={`${stylesCommon.container}`}>
     <div className={`mt-30 mr-15 ${styles.menu}`}>
       <ProfileMenu />
     </div>
     <form
-      className={`mt-30 ${styles.form} ${commonStyles.form}`}
+      className={`mt-30 ${styles.form} ${stylesCommon.form}`}
       onSubmit={handleSubmit}
     >
       <>
@@ -86,7 +86,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
         )}
         {updateUserError && (
           <p
-            className={`${commonStyles.error} pt-5 text text_type_main-default`}
+            className={`${stylesCommon.error} pt-5 text text_type_main-default`}
           >
             {updateUserError}
           </p>

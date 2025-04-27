@@ -6,7 +6,7 @@ const MOBILE_BREAKPOINT = 768; // Adjust this breakpoint as needed
  * Custom hook to check if the current viewport matches a mobile media query.
  * @returns {boolean} True if the viewport width is less than or equal to the mobile breakpoint, false otherwise.
  */
-export const useMatchMedia = (): boolean => {
+export const useIsMobile = (): boolean => {
   const mediaQueryString = useMemo(
     () => `(max-width: ${MOBILE_BREAKPOINT}px)`,
     []

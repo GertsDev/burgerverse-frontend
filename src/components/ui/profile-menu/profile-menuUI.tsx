@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './profile-menu.module.css';
+import styles from './profile-menuUI.module.css';
 import { ProfileMenuUIProps } from './type';
 
 export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({

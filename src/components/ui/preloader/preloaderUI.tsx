@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './preloader.module.css';
+import styles from './preloaderUI.module.css';
 
 export const Preloader = () => (
   <div className={styles.preloader}>

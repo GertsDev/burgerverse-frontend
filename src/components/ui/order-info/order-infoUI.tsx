@@ -4,7 +4,7 @@ import {
 } from '@zlden/react-developer-burger-ui-components';
 import { FC, memo } from 'react';
 
-import styles from './order-info.module.css';
+import styles from './order-infoUI.module.css';
 
 import { OrderStatus } from '@components';
 import { OrderInfoUIProps } from './type';

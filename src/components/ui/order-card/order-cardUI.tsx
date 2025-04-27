@@ -3,7 +3,7 @@ import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { formatDate } from 'utils/format-date';
 
-import styles from './order-card.module.css';
+import styles from './order-cardUI.module.css';
 
 import { OrderStatus } from '@components';
 import { OrderCardUIProps } from './type';

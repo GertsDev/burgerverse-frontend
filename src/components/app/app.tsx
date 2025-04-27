@@ -20,6 +20,8 @@ import {
   PageWrapper,
   ProtectedRoute
 } from '@components';
+import { MobileMenu } from '@components/mobileMenu';
+import { useIsMobile } from '@hooks/useIsMobile';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { checkUserAuth } from '../../services/authActions';
@@ -44,10 +46,13 @@ const App = () => {
     dispatch(getIngredients());
   }, [dispatch]);
 
+  const isMobile = useIsMobile();
+
   return (
     <div className={styles.app}>
       <AppHeader />
       <ImagePreloader />
+      {isMobile && <MobileMenu />}
       <Routes location={LocationState?.background || location}>
         {/* Public routes */}
         <Route path='/' element={<ConstructorPage />} />
