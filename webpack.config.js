@@ -31,7 +31,14 @@ module.exports = (env, argv) => ({
           'style-loader',
           {
             loader: 'css-loader',
-            options: { modules: true }
+            options: {
+              modules: {
+                localIdentName:
+                  argv.mode === 'development'
+                    ? '[local]__[path][name]__[hash:base64:5]'
+                    : '[hash:base64]'
+              }
+            }
           }
         ]
       },
