@@ -1,18 +1,18 @@
-import { CloseIcon } from '@zlden/react-developer-burger-ui-components';
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { ModalOverlay } from '../modal-overlay/modal-overlay';
+import { useParams } from 'react-router-dom';
+
 import styles from './modal.module.css';
 
-interface ModalProps {
-  title?: string;
-  onClose: () => void;
-  children: ReactNode;
-}
+import { CloseIcon } from '@zlden/react-developer-burger-ui-components';
+import { ModalOverlay } from '../modal-overlay/modal-overlay';
+import { TModalProps } from './types';
 
 const modalRoot = document.getElementById('modals');
 
-export const Modal: FC<ModalProps> = ({ title, onClose, children }) => {
+export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
+  const { number } = useParams();
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -25,6 +25,10 @@ export const Modal: FC<ModalProps> = ({ title, onClose, children }) => {
       document.removeEventListener('keydown', handleEsc);
     };
   }, [onClose]);
+
+  if (number) {
+    title = `#${number}`;
+  }
 
   if (!modalRoot) return null;
 
@@ -53,4 +57,4 @@ export const Modal: FC<ModalProps> = ({ title, onClose, children }) => {
     </>,
     modalRoot
   );
-};
+});
