@@ -1,23 +1,25 @@
-import { ProfileMenuUI } from '@ui';
 import type { Meta, StoryObj } from '@storybook/react';
+import { ProfileMenu } from '../components/profile-menu/profile-menu';
 
 const meta = {
-  title: 'Example/ProfileMenu',
-  component: ProfileMenuUI,
+  title: 'Profile Menu',
+  component: ProfileMenu,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
-    layout: 'fullscreen'
+    layout: 'centered'
   }
-} satisfies Meta<typeof ProfileMenuUI>;
+} satisfies Meta<typeof ProfileMenu>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultProfileMenu: Story = {
+export const Default: Story = {
   args: {
-    pathname: '/profile',
-    handleLogout: () => {}
+    // Remove props previously passed to UI component
+    // pathname: '/profile',
+    // handleLogout: () => {}
   }
+  // To show active states, you might need Router mocking
 };

@@ -1,1 +1,1 @@
-export * from './modal-overlayUI';
+export * from './modal-overlay';

@@ -1,5 +1,5 @@
-import { BurgerConstructorElement, Modal } from '@components';
-import { OrderDetailsUI, Preloader } from '@ui';
+import { BurgerConstructorElement } from '@components';
+import { Modal, OrderDetailsUI, Preloader } from '@ui';
 import { TConstructorIngredient } from '@utils-types';
 import {
   Button,
