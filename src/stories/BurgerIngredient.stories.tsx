@@ -1,10 +1,9 @@
-import React from 'react';
-import { BurgerIngredientUI } from '@ui';
 import type { Meta, StoryObj } from '@storybook/react';
+import { BurgerIngredient } from '../components/burger-ingredient/burger-ingredient';
 
 const meta = {
-  title: 'Example/BurgerIngredient',
-  component: BurgerIngredientUI,
+  title: 'Burger Ingredient',
+  component: BurgerIngredient,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
@@ -18,7 +17,7 @@ const meta = {
       </div>
     )
   ]
-} satisfies Meta<typeof BurgerIngredientUI>;
+} satisfies Meta<typeof BurgerIngredient>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -27,27 +26,36 @@ export const DefaultIngredient: Story = {
   args: {
     ingredient: {
       _id: '111',
-      name: 'Булка',
-      type: 'top',
-      proteins: 12,
-      fat: 33,
-      carbohydrates: 22,
-      calories: 33,
-      price: 123,
-      image: '',
-      image_large: '',
-      image_mobile: ''
+      name: 'Краторная булка N-200i',
+      type: 'bun',
+      proteins: 80,
+      fat: 24,
+      carbohydrates: 53,
+      calories: 420,
+      price: 1255,
+      image: 'https://code.s3.yandex.net/react/code/bun-02.png',
+      image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
+      image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png'
     },
-    count: 2,
-    locationState: {
-      background: {
-        hash: '',
-        key: 'eitkep27',
-        pathname: '/',
-        search: '',
-        state: null
-      }
+    count: 1
+  }
+};
+
+export const IngredientWithCount: Story = {
+  args: {
+    ingredient: {
+      _id: '222',
+      name: 'Соус Spicy-X',
+      type: 'sauce',
+      proteins: 30,
+      fat: 20,
+      carbohydrates: 40,
+      calories: 30,
+      price: 90,
+      image: 'https://code.s3.yandex.net/react/code/sauce-02.png',
+      image_large: 'https://code.s3.yandex.net/react/code/sauce-02-large.png',
+      image_mobile: 'https://code.s3.yandex.net/react/code/sauce-02-mobile.png'
     },
-    handleAdd: () => {}
+    count: 3
   }
 };

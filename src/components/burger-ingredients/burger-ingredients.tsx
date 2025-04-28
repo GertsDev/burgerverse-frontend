@@ -1,44 +1,50 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { IngredientsCategory } from '@components'; // Import IngredientsCategory
+import { TIngredient, TTabMode } from '@utils-types';
+import { Tab } from '@zlden/react-developer-burger-ui-components';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-
-import { TTabMode } from '@utils-types';
 import { useSelector } from 'react-redux';
 import { getIngredientState } from '../../services/slices/ingredients-slice';
-import { BurgerIngredientsUI } from '../ui/burger-ingredients';
+// Import and rename the CSS module
+import styles from './burger-ingredients.module.css';
 
 export const BurgerIngredients: FC = () => {
-  /** TODO: взять переменные из стора */
-  const { ingredients, loading, error } = useSelector(getIngredientState);
-  const buns = ingredients.filter((item) => item.type === 'bun');
-  const mains = ingredients.filter((item) => item.type === 'main');
-  const sauces = ingredients.filter((item) => item.type === 'sauce');
+  // Logic from the original container (burger-ingredientsUI.tsx)
+  const { ingredients, loading, error } = useSelector(getIngredientState); // TODO: Handle loading/error states
+
+  // Use useMemo for optimized filtering
+  const buns = useMemo(
+    () => ingredients.filter((item: TIngredient) => item.type === 'bun'),
+    [ingredients]
+  );
+  const mains = useMemo(
+    () => ingredients.filter((item: TIngredient) => item.type === 'main'),
+    [ingredients]
+  );
+  const sauces = useMemo(
+    () => ingredients.filter((item: TIngredient) => item.type === 'sauce'),
+    [ingredients]
+  );
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);
   const titleMainRef = useRef<HTMLHeadingElement>(null);
   const titleSaucesRef = useRef<HTMLHeadingElement>(null);
 
-  const [bunsRef, inViewBuns] = useInView({
-    threshold: 0
-  });
-
-  const [mainsRef, inViewFilling] = useInView({
-    threshold: 0
-  });
-
-  const [saucesRef, inViewSauces] = useInView({
-    threshold: 0
-  });
+  const [bunsRef, inViewBuns] = useInView({ threshold: 0 });
+  const [mainsRef, inViewMains] = useInView({ threshold: 0 }); // Renamed for clarity
+  const [saucesRef, inViewSauces] = useInView({ threshold: 0 });
 
   useEffect(() => {
     if (inViewBuns) {
       setCurrentTab('bun');
     } else if (inViewSauces) {
       setCurrentTab('sauce');
-    } else if (inViewFilling) {
+    } else if (inViewMains) {
+      // Use renamed variable
       setCurrentTab('main');
     }
-  }, [inViewBuns, inViewFilling, inViewSauces]);
+  }, [inViewBuns, inViewMains, inViewSauces]); // Use renamed variable
 
   const onTabClick = (tab: string) => {
     setCurrentTab(tab as TTabMode);
@@ -50,21 +56,61 @@ export const BurgerIngredients: FC = () => {
       titleSaucesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  //return null;
+  // Add loading/error handling
+  if (loading) {
+    return <p>Loading ingredients...</p>; // Or use a Preloader component
+  }
 
+  if (error) {
+    return <p>Error loading ingredients: {error}</p>;
+  }
+
+  // Integrated UI Structure (from ui/burger-ingredientsUI.tsx)
   return (
-    <BurgerIngredientsUI
-      currentTab={currentTab}
-      buns={buns}
-      mains={mains}
-      sauces={sauces}
-      titleBunRef={titleBunRef}
-      titleMainRef={titleMainRef}
-      titleSaucesRef={titleSaucesRef}
-      bunsRef={bunsRef}
-      mainsRef={mainsRef}
-      saucesRef={saucesRef}
-      onTabClick={onTabClick}
-    />
+    <>
+      <section className={styles.burger_ingredients}>
+        <nav>
+          <ul className={styles.menu}>
+            <Tab value='bun' active={currentTab === 'bun'} onClick={onTabClick}>
+              Buns
+            </Tab>
+            <Tab
+              value='main'
+              active={currentTab === 'main'}
+              onClick={onTabClick}
+            >
+              Fillings
+            </Tab>
+            <Tab
+              value='sauce'
+              active={currentTab === 'sauce'}
+              onClick={onTabClick}
+            >
+              Sauces
+            </Tab>
+          </ul>
+        </nav>
+        <div className={styles.content} data-cy='ingredients-list'>
+          <IngredientsCategory
+            title='Stellar Buns'
+            titleRef={titleBunRef}
+            ingredients={buns} // Use derived state
+            ref={bunsRef} // Use ref directly
+          />
+          <IngredientsCategory
+            title='Cosmic Fillings'
+            titleRef={titleMainRef}
+            ingredients={mains} // Use derived state
+            ref={mainsRef} // Use ref directly
+          />
+          <IngredientsCategory
+            title='Space Sauces'
+            titleRef={titleSaucesRef}
+            ingredients={sauces} // Use derived state
+            ref={saucesRef} // Use ref directly
+          />
+        </div>
+      </section>
+    </>
   );
 };

@@ -156,25 +156,62 @@ burgerverse/
 
 ## 📚 Component Architecture
 
-We follow the Container/Presentational pattern:
+This project previously followed the Container/Presentational pattern but is being refactored towards a more modern approach using React Hooks.
 
-- **Container Components**: Handle logic and data
-- **Presentational Components**: Pure rendering with props
+- **Combined Components**: Logic (state management, hooks, data fetching) and presentation (JSX, styling) are co-located within the same component file, typically located in `src/components/{feature-name}/`.
+- **Hooks for Logic**: Reusable logic is extracted into custom hooks (`src/hooks/`) and Redux logic is handled via `useSelector` and `useDispatch` directly within components.
+- **Generic UI**: Truly reusable, purely presentational UI primitives (like Buttons, Inputs, Modals if not library-provided) are kept in `src/components/ui/`.
 
-Example:
+Example (Refactored `BurgerIngredients`):
 
 ```typescript
-// Container Component (app-header.tsx)
-const AppHeader: FC = () => {
-  const { user } = useSelector(getUserState);
-  return <AppHeaderUI userName={user.name} />;
-};
+// src/components/burger-ingredients/burger-ingredients.tsx
 
-// Presentational Component (ui/app-header.tsx)
-const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
-  <header>...</header>
-);
+import { IngredientsCategory } from '@components';
+import { TTabMode, TIngredient } from '@utils-types';
+import { Tab } from '@zlden/react-developer-burger-ui-components';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
+import { getIngredientState } from '../../services/slices/ingredients-slice';
+import styles from './burger-ingredients.module.css';
+
+export const BurgerIngredients: FC = () => {
+  // Hooks for state and Redux data
+  const { ingredients, loading, error } = useSelector(getIngredientState);
+  const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
+  // ... refs and other hooks ...
+
+  // Derived state
+  const buns = useMemo(() => ingredients.filter(/*...*/), [ingredients]);
+  // ... mains, sauces ...
+
+  // Event Handlers
+  const onTabClick = (tab: string) => { /* ... */ };
+
+  // Conditional rendering based on state
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error...</p>;
+
+  // JSX combining presentation and handlers/data
+  return (
+    <section className={styles.burger_ingredients}>
+      <nav>
+        <Tab value='bun' active={currentTab === 'bun'} onClick={onTabClick}>
+          Buns
+        </Tab>
+        {/* ... other tabs ... */}
+      </nav>
+      <div className={styles.content}>
+        <IngredientsCategory title='Stellar Buns' ingredients={buns} /* ... */ />
+        {/* ... other categories ... */}
+      </div>
+    </section>
+  );
+};
 ```
+
+This approach reduces boilerplate and keeps related code together, making components easier to understand and maintain.
 
 ## 🔒 Authentication & API Integration
 

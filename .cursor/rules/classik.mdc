@@ -1,178 +1,100 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
+# Burgerverse Frontend Project Structure & Guidelines
 
-# Your rule content
-
-- You can @ files here
-- You can use markdown but dont have to
-
-backend structure:
-
-# Burgerverse Backend
-
-This backend powers the Burgerverse app. It provides RESTful APIs for user authentication, user management, and other business logic. This guide is for frontend developers to quickly understand, run, and integrate with the backend.
+This document outlines the structure, technologies, and conventions used in the Burgerverse frontend application. Use this information to maintain consistency and understand the codebase.
 
 ---
 
 ## 🏗️ Tech Stack
 
-- **Node.js**
-- **Express.js**
-- **MongoDB**
-- **JWT** for authentication
-- **TypeScript** (if used)
+- **Framework:** ReactJS (`react`, `react-dom`)
+- **Language:** TypeScript
+- **State Management:** Redux Toolkit (`@reduxjs/toolkit`, `react-redux`, `redux-thunk`)
+- **Routing:** React Router (`react-router-dom`)
+- **UI Components:** Uses `Custom UI components and extensions are located in `src/components/ui`.
+- **Styling:** CSS Modules (`*.module.css`).
+    - Class names in development: `[local]__[path][name]__[hash:base64:5]`.
+    - Class names in production: `[hash:base64]`.
+    - Utility for conditional classes: `clsx`.
+- **Build Tool:** Webpack (`webpack`, `webpack-dev-server`, `babel-loader`, `css-loader`, `ts-loader`)
+- **Testing:**
+    - Unit/Integration: Jest (`jest`, `ts-jest`, `@testing-library/react`)
+    - E2E: Cypress (`cypress`)
+- **Linting/Formatting:** ESLint (`eslint`), Prettier (`prettier`)
+- **Storybook:** For component development and documentation (`@storybook/react`)
 
 ---
 
-## 📁 Directory Structure
+## 📁 Directory Structure (`src/`)
 
-```
-/src
-  index.ts
-  db.ts
-  /config
-    auth.ts
-  /initialData
-    seed.ts
-    seedIngredients.ts
-    ingredientsData.ts
-  /middleware
-    authMiddleware.ts
-  /models
-    Counter.ts
-    Order.ts
-    Ingredient.ts
-    User.ts
-  /routes
-    ingredients.ts
-    orders.ts
-    auth.ts
-```
+- **`components/`**: Contains reusable React components.
+    - **`app/`**: Core application layout components (e.g., `App`, `AppHeader`).
+    - **`ui/`**: Generic UI elements (buttons, inputs, modals, etc.) possibly extending or supplementing the main UI library.
+    - **Feature-specific folders** (e.g., `burger-constructor/`, `burger-ingredients/`, `feed-info/`, `order-info/`): Components related to specific application features.
+- **`hooks/`**: Custom React hooks for reusable logic (e.g., fetching data, managing local state).
+- **`images/`**: Static image assets.
+- **`pages/`**: Top-level components representing application pages/routes (e.g., `LoginPage`, `ConstructorPage`, `FeedPage`).
+- **`services/`**: Redux Toolkit related files.
+    - **`slices/`**: Redux state slices, defining reducers and actions for different state domains (e.g., `userSlice`, `ingredientsSlice`, `orderSlice`).
+    - **`selectors/`**: Functions to select specific pieces of state from the Redux store (memoized for performance).
+    - **`store.ts`**: Redux store configuration.
+- **`stories/`**: Storybook stories for components.
+- **`utils/`**: Utility functions and modules.
+    - **`api/`**: Functions for interacting with the backend API (fetching data, authentication). Likely uses `fetch` or a wrapper.
+    - **`cookie.ts`**: Utilities for handling browser cookies (e.g., for auth tokens).
+    - **`types.ts`**: Shared TypeScript type definitions used across the application.
+- **`index.tsx`**: Application entry point, initializes React DOM and Redux store.
+- **`index.css`**: Global CSS styles.
 
 ---
 
-## 🚀 Running Locally
+## 🔑 Authentication Flow (Frontend Perspective)
 
-1. **Clone the repo:**
-
-   ```bash
-   git clone <repo-url>
-   cd burgerverse-backend
-   ```
-
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-   # or
-   yarn
-   ```
-
-3. **Set up environment variables:**
-
-   - Copy `.env.example` to `.env` and fill in values (DB URI, JWT secret, etc.)
-
-4. **Start the server:**
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-   The backend will run on `http://localhost:3001` (or as set in `.env`).
+- Uses `accessToken` (short-lived, stored likely in cookies managed by `@utils-cookie` or directly via API responses) for authenticated API requests (`Authorization: Bearer <token>`).
+- Uses `refreshToken` (long-lived, stored in `localStorage`) to request a new `accessToken` when it expires (via `/auth/token` endpoint).
+- Authentication state (user data, logged-in status) is managed in a Redux slice (likely `userSlice` in `@slices/`).
+- API calls related to auth are likely in `@api/auth-api.ts` or similar.
+- Protected routes are handled using a component like `ProtectedRoute` which checks the auth state.
 
 ---
 
-## 🔑 Authentication Flow
+## ⚙️ Path Aliases (`tsconfig.json`)
 
-- **Register:** `POST /auth/register`
-- **Login:** `POST /auth/login`
-- **Logout:** `POST /auth/logout`
-- **Get User:** `GET /auth/user` (requires `Authorization: Bearer <accessToken>`)
-- **Update User:** `PATCH /auth/user` (requires auth)
-- **Password Reset:**
-  - Request: `POST /password-reset`
-  - Reset: `POST /password-reset/reset`
+Use these aliases for cleaner imports:
 
-**Tokens:**
-
-- On login/register, backend returns:
-  - `accessToken` (JWT, short-lived, sent in `Authorization` header)
-  - `refreshToken` (long-lived, stored in localStorage)
-- Use `accessToken` for authenticated requests.
-- If `accessToken` expires, use `refreshToken` to get a new one (`/auth/token`).
-
-**Cookies:**
-
-- The frontend stores `accessToken` in cookies for requests.
-- `refreshToken` is stored in localStorage.
+- `@api/*`: `src/utils/api/*`
+- `@components/*`: `src/components/*`
+- `@components`: `src/components/index.ts`
+- `@ui/*`: `src/components/ui/*`
+- `@ui`: `src/components/ui/index.ts`
+- `@pages/*`: `src/pages/*`
+- `@pages`: `src/pages/index.ts`
+- `@images/*`: `src/images/*`
+- `@ui-pages/*`: `src/components/ui/pages/*` (Note: Structure suggests UI components specific to pages)
+- `@ui-pages`: `src/components/ui/pages/index.ts`
+- `@slices/*`: `src/services/slices/*`
+- `@selectors/*`: `src/services/selectors/*`
+- `@utils-types`: `src/utils/types.ts`
+- `@utils-cookie`: `src/utils/cookie.ts`
+- `@redux-store`: `src/services/store.ts`
+- `@hooks/*`: `src/hooks/*`
 
 ---
 
-## 🧑‍💻 API Overview
+## ✨ Coding Conventions & Best Practices
 
-| Endpoint                | Method | Auth Required | Description               |
-| ----------------------- | ------ | ------------- | ------------------------- |
-| `/auth/register`        | POST   | No            | Register new user         |
-| `/auth/login`           | POST   | No            | Login user                |
-| `/auth/logout`          | POST   | Yes           | Logout user               |
-| `/auth/user`            | GET    | Yes           | Get current user info     |
-| `/auth/user`            | PATCH  | Yes           | Update user info          |
-| `/password-reset`       | POST   | No            | Request password reset    |
-| `/password-reset/reset` | POST   | No            | Reset password with token |
-| `/auth/token`           | POST   | No            | Refresh access token      |
-
-**Request/Response Example:**
-See `api/auth-api.ts` in frontend for expected payloads.
+- **Follow custom instructions:** Adhere to the user's provided guidelines regarding early returns, naming conventions (`handleEvent`), accessibility (`tabindex`, `aria-label`), `const` functions with types.
+- **TypeScript:** Use strong typing wherever possible. Define interfaces/types in `@utils-types` for shared structures or locally within components/slices for specific needs.
+- **Redux Toolkit:** Follow RTK patterns for creating slices, dispatching actions (especially async thunks for API calls), and selecting state.
+- **Components:** Keep components focused and reusable. Use feature folders (`src/components/burger-constructor/`) for better organization. Separate presentational (`ui/`) from container/feature components.
+- **Error Handling:** Implement proper error handling for API calls (e.g., showing user feedback, logging errors).
+- **Accessibility (a11y):** Ensure components are accessible (semantic HTML, ARIA attributes, keyboard navigation). Use `eslint-plugin-jsx-a11y`.
+- **Testing:** Write tests for components (Jest/RTL) and critical user flows (Cypress).
 
 ---
 
-## ⚙️ Environment Variables
-
-- `PORT` - Port to run server (default: 3001)
-- `MONGO_URI` - MongoDB connection string
-- `JWT_SECRET` - Secret for JWT signing
-- `JWT_EXPIRES_IN` - Access token expiry
-- `REFRESH_TOKEN_SECRET` - Secret for refresh tokens
-
----
-
-## 🛠️ Useful Scripts
-
-- `npm run dev` - Start server in dev mode (with nodemon)
-- `npm run start` - Start server in prod mode
-
----
-
-## 🗂️ Where to Add/Find Logic
-
-- **Add new endpoints:** `/src/routes/`
-- **Business logic:** `/src/controllers/`
-- **Data models:** `/src/models/`
-- **Auth logic:** `/src/middlewares/auth.js`
-- **Error handling:** `/src/middlewares/error.js`
-
----
-
-## 🔗 Frontend Integration Notes
-
-- CORS is enabled for `http://localhost:3000` (frontend dev server).
-- All endpoints return JSON.
-- Error responses: `{ success: false, message: "Error message" }`
-- For any issues, check backend logs or contact backend team.
-
----
-
-## 🤝 Contributing/Contact
-
-- For questions, ping the backend team or open an issue.
-
----
-
-**This README is designed to help frontend devs get up and running fast, and understand how to integrate with the backend.**
-
-
+**This document helps maintain consistency and provides context for developing the Burgerverse frontend.**
