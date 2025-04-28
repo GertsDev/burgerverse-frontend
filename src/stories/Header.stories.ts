@@ -1,29 +1,30 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { AppHeaderUI } from '@ui';
+// Import the combined component
+import { AppHeader } from '../components/app-header/app-header';
 
 const meta = {
-  title: 'Example/Header',
-  component: AppHeaderUI,
+  title: 'App Header',
+  // Update component reference
+  component: AppHeader,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'fullscreen'
   }
-} satisfies Meta<typeof AppHeaderUI>;
+} satisfies Meta<typeof AppHeader>; // Update type reference
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LoggedIn: Story = {
+// The default story likely doesn't need args anymore, as the component gets user data from Redux.
+// Specific states like LoggedIn/LoggedOut would require Redux state mocking.
+export const Default: Story = {
   args: {
-    userName: 'John Doe'
+    // Remove props previously passed to UI component
+    // userName: 'John Doe' or undefined
   }
 };
 
-export const LoggedOut: Story = {
-  args: {
-    userName: undefined
-  }
-};
+// export const LoggedIn: Story = { ... }; // Requires Redux mock
+// export const LoggedOut: Story = { ... }; // Requires Redux mock

@@ -28,7 +28,7 @@ import { checkUserAuth } from '../../services/authActions';
 import { getIngredients } from '../../services/slices/ingredients-slice';
 import { getUserState } from '../../services/slices/userSlice';
 import { useDispatch, useSelector } from '../../services/store';
-import { ImagePreloader } from '../image-preloader/image-preloader';
+import { ImagePreloader } from '../../common/image-preloader';
 
 const App = () => {
   const navigate = useNavigate();
