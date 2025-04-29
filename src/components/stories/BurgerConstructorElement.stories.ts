@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BurgerConstructorElement } from '../components/burger-constructor-element/burger-constructor-element';
+import { BurgerConstructorElement } from '../burger-constructor-element/burger-constructor-element';
 
 const meta = {
   title: 'Burger Constructor Element',

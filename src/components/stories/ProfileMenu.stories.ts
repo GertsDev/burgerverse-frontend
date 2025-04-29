@@ -1,25 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FeedInfo } from '../components/feed-info/feed-info';
+import { ProfileMenu } from '../profile-menu/profile-menu';
 
 const meta = {
-  title: 'Feed Info',
-  component: FeedInfo,
+  title: 'Profile Menu',
+  component: ProfileMenu,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
-    layout: 'fullscreen'
+    layout: 'centered'
   }
-} satisfies Meta<typeof FeedInfo>;
+} satisfies Meta<typeof ProfileMenu>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultFeedInfo: Story = {
+export const Default: Story = {
   args: {
     // Remove props previously passed to UI component
-    // feed: { ... },
-    // readyOrders: [123, 124, 125],
-    // pendingOrders: [126, 127]
+    // pathname: '/profile',
+    // handleLogout: () => {}
   }
+  // To show active states, you might need Router mocking
 };

@@ -12,7 +12,7 @@ import {
   getOrderState
 } from '../../services/slices/order-slice';
 import { useDispatch, useSelector } from '../../services/store';
-import { Preloader } from '../ui/preloader';
+import { Preloader } from '../../shared/ui/preloader';
 import styles from './order-info.module.css';
 
 export const OrderInfo: FC = () => {

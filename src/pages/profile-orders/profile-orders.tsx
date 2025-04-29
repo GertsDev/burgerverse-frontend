@@ -1,7 +1,7 @@
 import { OrdersList, ProfileMenu } from '@components';
 import { useDispatch } from '@redux-store';
 import { fetchUserOrders, getUserOrdersState } from '@slices/userOrdersSlice';
-import { Preloader } from '@ui';
+import { Preloader } from '@ui/index';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './profile-orders.module.css';

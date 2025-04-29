@@ -1,12 +1,12 @@
 import {
-  rootReducer,
   burgerConstructorInitialState,
+  feedInitialState,
   ingredientsInitialState,
   orderInitialState,
-  feedInitialState,
+  rootReducer,
   userInitialState,
   userOrdersInitialState
-} from '../../utils/jest-utils';
+} from '../../shared/utils/jest-utils';
 
 describe('rootReducer', () => {
   it('should initialize with the correct default state', () => {

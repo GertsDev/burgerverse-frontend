@@ -1,7 +1,7 @@
+import { Preloader } from '@ui/index';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useSelector } from '../../services/store';
 import { getUserState } from '../../services/slices/userSlice';
-import { Preloader } from '@ui';
+import { useSelector } from '../../services/store';
 
 type ProtectedRouteProps = {
   onlyAuthorized?: boolean;

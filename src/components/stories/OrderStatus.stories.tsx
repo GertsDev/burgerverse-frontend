@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { OrderStatus } from '../components/order-status/order-status';
+import { OrderStatus } from '../order-status/order-status';
 
 const meta = {
   title: 'Order Status',

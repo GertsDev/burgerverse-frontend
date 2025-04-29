@@ -20,22 +20,21 @@
     "paths": {
       "@app/*": ["app/*"],
       "@app": ["app/index.ts"],
-      "@api/*": ["utils/api/*"],
+      "@api/*": ["shared/api/*"],
       "@components/*": ["components/*"],
       "@components": ["components/index.ts"],
-      "@ui/*": ["components/ui/*"],
-      "@ui": ["components/ui/index.ts"],
+      "@ui/*": ["shared/ui/*"],
+      "@ui": ["shared/ui/index.ts"],
       "@pages/*": ["pages/*"],
       "@pages": ["pages/index.ts"],
       "@images/*": ["images/*"],
-      "@ui-pages/*": ["components/ui/pages/*"],
-      "@ui-pages": ["components/ui/pages/index.ts"],
       "@slices/*": ["services/slices/*"],
       "@selectors/*": ["services/selectors/*"],
-      "@utils-types": ["utils/types.ts"],
-      "@utils-cookie": ["utils/cookie.ts"],
+      "@utils-types": ["shared/utils/types.ts"],
+      "@utils-cookie": ["shared/utils/cookie.ts"],
       "@redux-store": ["services/store.ts"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["shared/utils/*"]
     }
   },
   "include": ["src", "src/components/order-details"]

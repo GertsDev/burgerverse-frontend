@@ -3,7 +3,7 @@ import { TIngredient, TOrder } from '@utils-types';
 import { CurrencyIcon } from '@zlden/react-developer-burger-ui-components';
 import { FC, memo, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { formatDate } from 'utils/format-date';
+import { formatDate } from 'shared/utils/format-date';
 import { getIngredientState } from '../../services/slices/ingredients-slice';
 import { useSelector } from '../../services/store';
 import styles from './order-card.module.css';

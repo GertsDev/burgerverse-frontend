@@ -4,7 +4,7 @@ import styles from './constructor-page.module.css';
 
 import { BurgerConstructor, BurgerIngredients } from '@components';
 import { getIngredientState } from '@slices/ingredients-slice';
-import { Preloader } from '@ui';
+import { Preloader } from '@ui/index';
 import { FC } from 'react';
 
 export const ConstructorPage: FC = () => {

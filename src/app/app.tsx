@@ -21,10 +21,10 @@ import {
 } from '@components';
 import { MobileMenu } from '@components/mobileMenu';
 import { useIsMobile } from '@hooks/useIsMobile';
-import { Modal } from '@ui';
+import { Modal } from '@ui/index';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { ImagePreloader } from '../common/image-preloader';
+import { ImagePreloader } from '../shared/utils/image-preloader';
 import { checkUserAuth } from '../services/authActions';
 import { getIngredients } from '../services/slices/ingredients-slice';
 import { getUserState } from '../services/slices/userSlice';

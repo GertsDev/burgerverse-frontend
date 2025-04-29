@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 // Import the combined component
-import { AppHeader } from '../app/app-header/app-header';
+import { AppHeader } from '../app-header/app-header';
 
 const meta = {
   title: 'App Header',

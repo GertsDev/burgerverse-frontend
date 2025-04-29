@@ -1,5 +1,5 @@
-export * from '../app/app-header';
 export * from '../app/protected-route';
+export * from './app-header';
 export * from './burger-constructor';
 export * from './burger-constructor-element';
 export * from './burger-ingredient';

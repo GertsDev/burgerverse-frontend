@@ -1,10 +1,10 @@
 import {
   addIngredient,
-  removeIngredient,
-  moveIngredient,
+  burgerConstructorInitialState,
   burgerConstructorReducer,
-  burgerConstructorInitialState
-} from '../../utils/jest-utils';
+  moveIngredient,
+  removeIngredient
+} from '../../shared/utils/jest-utils';
 
 import ingredientsFixture from '../__fixtures__/ingredients.json';
 

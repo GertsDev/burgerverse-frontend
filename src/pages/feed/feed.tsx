@@ -1,7 +1,7 @@
 import { FeedInfo, OrdersList } from '@components';
 import { useDispatch } from '@redux-store';
 import { fetchFeedOrders, getFeedState } from '@slices/feedsSlice';
-import { Preloader } from '@ui';
+import { Preloader } from '@ui/index';
 import { RefreshButton } from '@zlden/react-developer-burger-ui-components';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
