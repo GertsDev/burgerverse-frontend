@@ -1,1 +1,0 @@
-export { ProfileUI } from './profile';

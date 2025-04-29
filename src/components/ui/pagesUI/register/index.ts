@@ -1,1 +1,0 @@
-export { RegisterUI } from './register';

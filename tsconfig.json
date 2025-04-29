@@ -18,6 +18,8 @@
     "types": ["node", "jest"],
     "baseUrl": "src",
     "paths": {
+      "@app/*": ["app/*"],
+      "@app": ["app/index.ts"],
       "@api/*": ["utils/api/*"],
       "@components/*": ["components/*"],
       "@components": ["components/index.ts"],

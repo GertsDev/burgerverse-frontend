@@ -9,7 +9,7 @@ import {
   Register,
   ResetPassword
 } from '@pages';
-import '../../index.css';
+// import '../../index.css';
 import styles from './app.module.css';
 
 import {
@@ -24,11 +24,11 @@ import { useIsMobile } from '@hooks/useIsMobile';
 import { Modal } from '@ui';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { ImagePreloader } from '../../common/image-preloader';
-import { checkUserAuth } from '../../services/authActions';
-import { getIngredients } from '../../services/slices/ingredients-slice';
-import { getUserState } from '../../services/slices/userSlice';
-import { useDispatch, useSelector } from '../../services/store';
+import { ImagePreloader } from '../common/image-preloader';
+import { checkUserAuth } from '../services/authActions';
+import { getIngredients } from '../services/slices/ingredients-slice';
+import { getUserState } from '../services/slices/userSlice';
+import { useDispatch, useSelector } from '../services/store';
 
 const App = () => {
   const navigate = useNavigate();

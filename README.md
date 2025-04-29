@@ -63,39 +63,22 @@ npm start
 ```
 burgerverse/
 ├── src/
-│   ├── components/
+│   ├── app/ # Core application setup, layout, routing
 │   │   ├── app-header/
-│   │   ├── burger-constructor/
-│   │   ├── burger-constructor-element/
-│   │   ├── burger-ingredient/
-│   │   ├── burger-ingredients/
-│   │   ├── feed-info/
-│   │   ├── image-preloader/
-│   │   ├── ingredient-details/
-│   │   ├── ingredients-category/
-│   │   ├── modal/
-│   │   ├── modal-overlay/
-│   │   ├── order-card/
-│   │   ├── order-info/
-│   │   ├── order-status/
-│   │   ├── orders-list/
-│   │   ├── page-wrapper/
-│   │   ├── profile-menu/
+│   │   ├── mobileMenu/
 │   │   ├── protected-route/
+│   │   └── app.tsx # Main application component
+│   ├── components/ # Reusable feature and UI components
 │   │   ├── ui/
-│   │   └── app/
+│   │   ├── page-wrapper/
+│   │   ├── burger-constructor/
+│   │   ├── burger-ingredients/
+│   │   └── ... (other feature components)
 │   ├── images/
 │   ├── pages/
-│   │   ├── constructor-page/
-│   │   ├── feed/
-│   │   ├── forgot-password/
-│   │   ├── login/
-│   │   ├── not-fount-404/
-│   │   ├── profile/
-│   │   ├── profile-orders/
-│   │   ├── register/
-│   │   └── reset-password/
-│   ├── services/
+│   │   ├── ... (page components)
+│   │   └── common.module.css
+│   ├── services/ # Redux logic
 │   │   ├── slices/
 │   │   │   ├── constructorSlice.ts
 │   │   │   ├── feedsSlice.ts
@@ -156,62 +139,60 @@ burgerverse/
 
 ## 📚 Component Architecture
 
-This project previously followed the Container/Presentational pattern but is being refactored towards a more modern approach using React Hooks.
+This project follows a modern approach using React Hooks, co-locating logic and presentation within components.
 
-- **Combined Components**: Logic (state management, hooks, data fetching) and presentation (JSX, styling) are co-located within the same component file, typically located in `src/components/{feature-name}/`.
-- **Hooks for Logic**: Reusable logic is extracted into custom hooks (`src/hooks/`) and Redux logic is handled via `useSelector` and `useDispatch` directly within components.
-- **Generic UI**: Truly reusable, purely presentational UI primitives (like Buttons, Inputs, Modals if not library-provided) are kept in `src/components/ui/`.
+- **Page Components (`src/pages/`)**: Handle routing, fetch necessary data using hooks or Redux, manage relevant state, and define their own JSX structure. They utilize generic UI components from `src/components/ui/` or the base library (`@zlden/react-developer-burger-ui-components`). Common page layout styles are often handled via `src/pages/common.module.css`.
+- **Feature Components (`src/components/{feature-name}/`)**: Encapsulate specific features (e.g., `BurgerConstructor`, `BurgerIngredients`). They manage their own state and logic, often interacting with Redux.
+- **Generic UI Components (`src/components/ui/`)**: Contain reusable, purely presentational UI elements (e.g., `Modal`, `Preloader`) that are not tied to specific features or application logic.
+- **Hooks (`src/hooks/`)**: Reusable logic is extracted into custom hooks. Redux interactions (`useSelector`, `useDispatch`) are used directly within components needing access to the store.
 
-Example (Refactored `BurgerIngredients`):
+Example (`Profile` page component):
 
 ```typescript
-// src/components/burger-ingredients/burger-ingredients.tsx
+// src/pages/profile/profile.tsx
 
-import { IngredientsCategory } from '@components';
-import { TTabMode, TIngredient } from '@utils-types';
-import { Tab } from '@zlden/react-developer-burger-ui-components';
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { useSelector } from 'react-redux';
-import { getIngredientState } from '../../services/slices/ingredients-slice';
-import styles from './burger-ingredients.module.css';
+import { ProfileMenu } from '@components'; // Feature component
+import { useDispatch, useSelector } from '@redux-store';
+import { getUserState } from '@slices/userSlice';
+import { Button, Input } from '@zlden/react-developer-burger-ui-components'; // Base UI library
+import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { updateUser } from '../../services/authActions';
+import commonStyles from '../common.module.css'; // Common page styles
+import pageStyles from './profile.module.css'; // Specific page styles
 
-export const BurgerIngredients: FC = () => {
+export const Profile: FC = () => {
   // Hooks for state and Redux data
-  const { ingredients, loading, error } = useSelector(getIngredientState);
-  const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
-  // ... refs and other hooks ...
-
-  // Derived state
-  const buns = useMemo(() => ingredients.filter(/*...*/), [ingredients]);
-  // ... mains, sauces ...
+  const dispatch = useDispatch();
+  const { user } = useSelector(getUserState);
+  const [formValue, setFormValue] = useState({ /* ... */ });
+  // ... other hooks and effects ...
 
   // Event Handlers
-  const onTabClick = (tab: string) => { /* ... */ };
-
-  // Conditional rendering based on state
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error...</p>;
+  const handleSubmit = (e: SyntheticEvent) => { /* ... */ };
+  const handleCancel = (e: SyntheticEvent) => { /* ... */ };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => { /* ... */ };
 
   // JSX combining presentation and handlers/data
   return (
-    <section className={styles.burger_ingredients}>
-      <nav>
-        <Tab value='bun' active={currentTab === 'bun'} onClick={onTabClick}>
-          Buns
-        </Tab>
-        {/* ... other tabs ... */}
-      </nav>
-      <div className={styles.content}>
-        <IngredientsCategory title='Stellar Buns' ingredients={buns} /* ... */ />
-        {/* ... other categories ... */}
+    <main className={`${commonStyles.container}`}>
+      <div className={`mt-30 mr-15 ${pageStyles.menu}`}>
+        <ProfileMenu /> {/* Using a feature component */}
       </div>
-    </section>
+      <form /* ... */ onSubmit={handleSubmit}>
+        {/* ... Inputs using base UI library and page-specific styles ... */}
+        <Input /* ... */ />
+        <Input /* ... */ />
+        <Input /* ... */ />
+        {/* ... Buttons using base UI library ... */}
+        <Button /* ... */ >Cancel</Button>
+        <Button /* ... */ >Save</Button>
+      </form>
+    </main>
   );
 };
 ```
 
-This approach reduces boilerplate and keeps related code together, making components easier to understand and maintain.
+This approach keeps related code together, making components easier to understand and maintain.
 
 ## 🔒 Authentication & API Integration
 

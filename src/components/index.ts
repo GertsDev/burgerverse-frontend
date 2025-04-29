@@ -1,4 +1,5 @@
-export * from './app-header';
+export * from '../app/app-header';
+export * from '../app/protected-route';
 export * from './burger-constructor';
 export * from './burger-constructor-element';
 export * from './burger-ingredient';
@@ -12,4 +13,3 @@ export * from './order-status';
 export * from './orders-list';
 export * from './page-wrapper';
 export * from './profile-menu';
-export * from './protected-route';

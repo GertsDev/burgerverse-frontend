@@ -1,9 +1,10 @@
-import { ProfileOrdersUI } from '@components/ui/pagesUI';
+import { OrdersList, ProfileMenu } from '@components';
 import { useDispatch } from '@redux-store';
 import { fetchUserOrders, getUserOrdersState } from '@slices/userOrdersSlice';
 import { Preloader } from '@ui';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import styles from './profile-orders.module.css';
 
 export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,17 @@ export const ProfileOrders: FC = () => {
   }
 
   if (error) {
-    return <p>Ошибка: {error}</p>;
+    return <p>Error: {error}</p>;
   }
 
-  return <ProfileOrdersUI orders={orders} />;
+  return (
+    <main className={`${styles.main}`}>
+      <div className={`mt-30 mr-15 ${styles.menu}`}>
+        <ProfileMenu />
+      </div>
+      <div className={`mt-10 ${styles.orders}`}>
+        <OrdersList orders={orders} />
+      </div>
+    </main>
+  );
 };
