@@ -1,4 +1,3 @@
-export * from './forgot-password';
 export * from './login';
 export * from './profile';
 export * from './profile-orders';

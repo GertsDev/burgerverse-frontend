@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { PageUIProps } from '../common-type';
+import { PageUIProps } from '../../../../pages/common-type';
 
 export type ResetPasswordUIProps = Omit<PageUIProps, 'email' | 'setEmail'> & {
   password: string;

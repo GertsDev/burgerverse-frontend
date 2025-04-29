@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  max-width: 1240px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.wrapCenter {
+  margin: auto;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+}
+
+.form div {
+  width: 100%;
+  text-align: right;
+}
+
+.title {
+  margin: 0;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+.question {
+  color: #8585ad;
+}
+
+.link {
+  color: #4c4cff;
+  text-decoration: none;
+}
+
+.error {
+  color: #ff0000;
+  text-align: center;
+}
