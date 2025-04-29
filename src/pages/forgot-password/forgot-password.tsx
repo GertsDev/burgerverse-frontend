@@ -2,7 +2,7 @@ import { FC, SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { forgotPasswordApi } from '@api/auth-api';
-import { ForgotPasswordUI } from '@components/ui/pages';
+import { ForgotPasswordUI } from '@components/ui/pagesUI';
 
 export const ForgotPassword: FC = () => {
   const [email, setEmail] = useState('');

@@ -1,1 +1,0 @@
-export { FeedUI } from './feed';

@@ -1,6 +1,6 @@
+import { RegisterUI } from '@components/ui/pagesUI';
 import { useDispatch, useSelector } from '@redux-store';
 import { getUserState } from '@slices/userSlice';
-import { RegisterUI } from '@ui-pages';
 import { FC, SyntheticEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { registerUser } from '../../services/authActions';

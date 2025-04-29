@@ -1,6 +1,6 @@
+import { LoginUI } from '@components/ui/pagesUI';
 import { useDispatch, useSelector } from '@redux-store';
 import { getUserState } from '@slices/userSlice';
-import { LoginUI } from '@ui-pages';
 import { FC, SyntheticEvent, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { login } from '../../services/authActions';

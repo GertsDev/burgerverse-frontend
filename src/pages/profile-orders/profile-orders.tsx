@@ -1,7 +1,7 @@
+import { ProfileOrdersUI } from '@components/ui/pagesUI';
 import { useDispatch } from '@redux-store';
 import { fetchUserOrders, getUserOrdersState } from '@slices/userOrdersSlice';
 import { Preloader } from '@ui';
-import { ProfileOrdersUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 

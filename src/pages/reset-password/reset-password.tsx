@@ -2,7 +2,7 @@ import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { resetPasswordApi } from '@api/auth-api';
-import { ResetPasswordUI } from '@ui-pages';
+import { ResetPasswordUI } from '@components/ui/pagesUI';
 
 export const ResetPassword: FC = () => {
   const navigate = useNavigate();
