@@ -34,7 +34,8 @@
       "@utils-cookie": ["shared/utils/cookie.ts"],
       "@redux-store": ["services/store.ts"],
       "@hooks/*": ["hooks/*"],
-      "@utils/*": ["shared/utils/*"]
+      "@utils/*": ["shared/utils/*"],
+      "@services/*": ["services/*"]
     }
   },
   "include": ["src", "src/components/order-details"]

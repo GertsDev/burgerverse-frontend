@@ -11,21 +11,21 @@ export const ProtectedRoute = ({ onlyAuthorized }: ProtectedRouteProps) => {
   const location = useLocation();
   const { isAuthenticated, isAuthChecked } = useSelector(getUserState);
 
-  // Пока авторизация не проверена, показываем прелоадер
+  // While authentication is being checked, show the preloader
   if (!isAuthChecked) {
     return <Preloader />;
   }
 
-  // Если маршрут не требует авторизации, но пользователь авторизован, редиректим на главную страницу
+  // If the route does not require authorization, but the user is authenticated, redirect to the main page
   if (!onlyAuthorized && isAuthenticated) {
     return <Navigate replace to='/' />;
   }
 
-  // Если маршрут требует авторизации, но пользователь не авторизован, редиректим на страницу логина
+  // If the route requires authorization, but the user is not authenticated, redirect to the login page
   if (onlyAuthorized && !isAuthenticated) {
     return <Navigate replace to='/login' state={{ from: location }} />;
   }
 
-  // Если все условия соблюдены, рендерим дочерние компоненты через <Outlet />
+  // If all conditions are met, render the child components via <Outlet />
   return <Outlet />;
 };

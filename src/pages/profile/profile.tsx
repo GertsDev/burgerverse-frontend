@@ -42,7 +42,7 @@ export const Profile: FC = () => {
       updateUser({
         name: formValue.name,
         email: formValue.email,
-        password: formValue.password
+        ...(formValue.password && { password: formValue.password })
       })
     );
   };
