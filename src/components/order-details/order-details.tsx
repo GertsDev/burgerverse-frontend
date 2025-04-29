@@ -1,11 +1,9 @@
 import React from 'react';
-import doneImg from '../../../images/done.svg';
-import styles from './order-detailsUI.module.css';
-import { OrderDetailsUIProps } from './type';
+import doneImg from '@images/done.svg';
+import styles from './order-details.module.css';
+import { OrderDetailsProps } from './type';
 
-export const OrderDetailsUI: React.FC<OrderDetailsUIProps> = ({
-  orderNumber
-}) => (
+export const OrderDetails: React.FC<OrderDetailsProps> = ({ orderNumber }) => (
   <>
     <h2
       className={`${styles.title} text text_type_digits-large mt-2 mb-4`}

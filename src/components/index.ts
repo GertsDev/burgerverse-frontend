@@ -8,6 +8,7 @@ export * from './feed-info';
 export * from './ingredient-details';
 export * from './ingredients-category';
 export * from './order-card';
+export * from './order-details';
 export * from './order-info';
 export * from './order-status';
 export * from './orders-list';

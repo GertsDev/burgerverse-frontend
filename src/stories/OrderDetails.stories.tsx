@@ -1,10 +1,10 @@
-import React from 'react';
-import { OrderDetailsUI } from '@ui';
+import { OrderDetails } from '@components/order-details';
 import type { Meta, StoryObj } from '@storybook/react';
+
 
 const meta = {
   title: 'Example/OrderDetails',
-  component: OrderDetailsUI,
+  component: OrderDetails,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
@@ -26,7 +26,7 @@ const meta = {
       </div>
     )
   ]
-} satisfies Meta<typeof OrderDetailsUI>;
+} satisfies Meta<typeof OrderDetails>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

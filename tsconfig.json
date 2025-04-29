@@ -38,5 +38,5 @@
       "@hooks/*": ["hooks/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/components/order-details"]
 }

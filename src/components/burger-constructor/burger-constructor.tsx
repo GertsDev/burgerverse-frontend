@@ -1,5 +1,6 @@
 import { BurgerConstructorElement } from '@components';
-import { Modal, OrderDetailsUI, Preloader } from '@ui';
+import { OrderDetails } from '@components/order-details';
+import { Modal, Preloader } from '@ui';
 import { TConstructorIngredient } from '@utils-types';
 import {
   Button,
@@ -145,7 +146,7 @@ export const BurgerConstructor: FC = () => {
 
       {order && !orderRequest && (
         <Modal onClose={closeOrderModal} title={''}>
-          <OrderDetailsUI orderNumber={order.number} />
+          <OrderDetails orderNumber={order.number} />
         </Modal>
       )}
     </section>

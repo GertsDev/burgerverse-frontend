@@ -1,6 +1,5 @@
 import { FC, memo, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useParams } from 'react-router-dom';
 
 import styles from './modal.module.css';
 
@@ -11,8 +10,6 @@ import { TModalProps } from './types';
 const modalRoot = document.getElementById('modals');
 
 export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
-  const { number } = useParams();
-
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -25,10 +22,6 @@ export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
       document.removeEventListener('keydown', handleEsc);
     };
   }, [onClose]);
-
-  if (number) {
-    title = `#${number}`;
-  }
 
   if (!modalRoot) return null;
 
