@@ -46,3 +46,10 @@
   color: #ff0000;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+    flex-direction: column;
+  }
+}

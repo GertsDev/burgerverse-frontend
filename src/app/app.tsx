@@ -20,7 +20,6 @@ import {
   ProtectedRoute
 } from '@components';
 import { MobileMenu } from '@components/mobileMenu';
-import { useIsMobile } from '@hooks/useIsMobile';
 import { checkUserAuth } from '@services/authActions';
 import { useDispatch, useSelector } from '@services/store';
 import { getIngredients } from '@slices/ingredients-slice';
@@ -45,8 +44,6 @@ const App = () => {
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
-
-  const isMobile = useIsMobile();
 
   return (
     <div className={styles.app}>
