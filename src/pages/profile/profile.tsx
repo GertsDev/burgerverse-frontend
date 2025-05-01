@@ -64,19 +64,22 @@ export const Profile: FC = () => {
   };
 
   return (
-    <main className={`${commonStyles.container}`}>
-      <div className={`mt-30 mr-15 ${pageStyles.menu}`}>
+    <main
+      className={`${commonStyles.container} ${pageStyles.profileContainer}`}
+    >
+      <div className={`${pageStyles.menuWrapper} `}>
         <ProfileMenu />
       </div>
       <form
-        className={`mt-30 ${pageStyles.form} ${commonStyles.form}`}
+        className={` ${pageStyles.formWrapper} ${commonStyles.form}`}
         onSubmit={handleSubmit}
       >
         <>
-          <div className='pb-6'>
+          <div className={`${pageStyles.inputWrapper} pb-6`}>
+            <label className={pageStyles.label}>Name</label>
             <Input
               type={'text'}
-              placeholder={'Имя'}
+              placeholder={'Name'}
               onChange={handleInputChange}
               value={formValue.name}
               name={'name'}
@@ -106,7 +109,7 @@ export const Profile: FC = () => {
           <div className='pb-6'>
             <Input
               type={'password'}
-              placeholder={'Пароль'}
+              placeholder={'Password'}
               onChange={handleInputChange}
               value={formValue.password}
               name={'password'}

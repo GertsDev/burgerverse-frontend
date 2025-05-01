@@ -1,7 +1,64 @@
-.menu {
-  width: 320px;
+/* --- Desktop First Styles --- */
+
+/* Style the main container */
+.profileContainer {
+  gap: calc(var(--offset-base-size) * 15);
+
+  align-items: flex-start; /* Align items to the top */
 }
 
-.form {
-  max-width: 480px;
+/* Style the menu wrapper */
+.menuWrapper {
+  width: 320px; /* Original width */
+  flex-shrink: 0; /* Prevent shrinking */
+
+  /* Replicate mt-30: calc(var(--offset-base-size) * 30) */
+  /* Assuming --offset-base-size is 4px, 30 * 4px = 120px */
+  margin-top: calc(var(--offset-base-size) * 30);
+}
+
+/* Style the form wrapper */
+.formWrapper {
+  max-width: 480px; /* Original max-width */
+  width: 100%; /* Allow it to take space */
+
+  /* Replicate mt-30: calc(var(--offset-base-size) * 30) */
+  margin-top: calc(var(--offset-base-size) * 30);
+}
+
+
+/* Keep existing button styles */
+.buttons {
+  display: flex;
+  gap: calc(var(--offset-base-size) * 5); /* e.g., 20px if base is 4px */
+  justify-content: flex-end; /* Align right on desktop */
+  margin-top: calc(var(--offset-base-size) * 5); /* e.g., 20px */
+}
+
+
+
+@media (max-width: 768px) {
+  .profileContainer {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: calc(var(--offset-base-size) * 10);
+  }
+
+  .menuWrapper {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: calc(var(--offset-base-size) * 10);
+  }
+
+  .formWrapper {
+    max-width: 100%; /* Ensure form doesn't exceed container width */
+    width: 100%; /* Ensure form takes available width */
+    margin-top: calc(var(--offset-base-size) * 10);; /* Reset desktop margin */
+  }
+
+  .buttons {
+    justify-content: space-between; /* Space out Cancel/Save */
+    margin-top: calc(var(--offset-base-size) * 8); /* Adjust margin (e.g., 32px) */
+  }
 }

@@ -15,13 +15,8 @@
   align-items: center;
 }
 
-.form {
-  width: 100%;
-}
-
 .form div {
   width: 100%;
-  text-align: right;
 }
 
 .title {
