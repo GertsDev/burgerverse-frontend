@@ -26,7 +26,6 @@
   margin-top: calc(var(--offset-base-size) * 30);
 }
 
-
 /* Keep existing button styles */
 .buttons {
   display: flex;
@@ -35,7 +34,16 @@
   margin-top: calc(var(--offset-base-size) * 5); /* e.g., 20px */
 }
 
+.label {
+  display: none;
+}
 
+.inputWithIcon svg {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--offset-base-size) * 4); /* e.g., 16px */
+  transform: translateY(-50%); /* Vertical centering */
+}
 
 @media (max-width: 768px) {
   .profileContainer {
@@ -54,11 +62,21 @@
   .formWrapper {
     max-width: 100%; /* Ensure form doesn't exceed container width */
     width: 100%; /* Ensure form takes available width */
-    margin-top: calc(var(--offset-base-size) * 10);; /* Reset desktop margin */
+    margin-top: calc(var(--offset-base-size) * 10); /* Reset desktop margin */
   }
 
   .buttons {
     justify-content: space-between; /* Space out Cancel/Save */
-    margin-top: calc(var(--offset-base-size) * 8); /* Adjust margin (e.g., 32px) */
+    margin-top: calc(
+      var(--offset-base-size) * 8
+    ); /* Adjust margin (e.g., 32px) */
   }
+
+  /* .label {
+    display: flex;
+    padding-left: 20px;
+    padding-bottom: 10px;
+  } */
+
+
 }

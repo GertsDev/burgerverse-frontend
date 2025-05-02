@@ -87,11 +87,13 @@ export const Profile: FC = () => {
               errorText={''}
               size={'default'}
               icon={'EditIcon'}
+              extraClass={pageStyles.inputWithIcon}
               onPointerEnterCapture={() => {}}
               onPointerLeaveCapture={() => {}}
             />
           </div>
           <div className='pb-6'>
+            <label className={pageStyles.label}>E-mail</label>
             <Input
               type={'email'}
               placeholder={'E-mail'}
@@ -102,11 +104,13 @@ export const Profile: FC = () => {
               errorText={''}
               size={'default'}
               icon={'EditIcon'}
+              extraClass={pageStyles.inputWithIcon}
               onPointerEnterCapture={() => {}}
               onPointerLeaveCapture={() => {}}
             />
           </div>
           <div className='pb-6'>
+            <label className={pageStyles.label}>Password</label>
             <Input
               type={'password'}
               placeholder={'Password'}
@@ -117,6 +121,7 @@ export const Profile: FC = () => {
               errorText={''}
               size={'default'}
               icon={'EditIcon'}
+              extraClass={pageStyles.inputWithIcon}
               onPointerEnterCapture={() => {}}
               onPointerLeaveCapture={() => {}}
             />
