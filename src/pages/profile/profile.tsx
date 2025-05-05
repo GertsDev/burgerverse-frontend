@@ -136,6 +136,7 @@ export const Profile: FC = () => {
           {/* Inputs */}
           <div className={`${pageStyles.inputWrapper} pb-6`}>
             <label className={pageStyles.label}>Name</label>
+            {/* @ts-ignore // Ignore missing pointer props due to library issue */}
             <Input
               type={'text'}
               placeholder={'Name'}
@@ -148,12 +149,11 @@ export const Profile: FC = () => {
               icon={'EditIcon'}
               extraClass={pageStyles.inputWithIcon}
               disabled={loading}
-              onPointerEnterCapture={() => {}} // Consider removing if not needed
-              onPointerLeaveCapture={() => {}}
             />
           </div>
           <div className='pb-6'>
             <label className={pageStyles.label}>E-mail</label>
+            {/* @ts-ignore // Ignore missing pointer props due to library issue */}
             <Input
               type={'email'}
               placeholder={'E-mail'}
@@ -166,8 +166,6 @@ export const Profile: FC = () => {
               icon={'EditIcon'}
               extraClass={pageStyles.inputWithIcon}
               disabled={loading}
-              onPointerEnterCapture={() => {}} // Consider removing if not needed
-              onPointerLeaveCapture={() => {}}
             />
           </div>
           <div className='pb-6'>
