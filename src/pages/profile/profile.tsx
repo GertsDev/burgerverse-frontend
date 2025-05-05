@@ -182,6 +182,7 @@ export const Profile: FC = () => {
               icon={'ShowIcon'}
               autoComplete='new-password'
               disabled={loading}
+              extraClass={pageStyles.inputWithIcon}
             />
           </div>
 
