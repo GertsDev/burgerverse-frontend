@@ -66,17 +66,8 @@
   }
 
   .buttons {
-    justify-content: space-between; /* Space out Cancel/Save */
     margin-top: calc(
       var(--offset-base-size) * 8
     ); /* Adjust margin (e.g., 32px) */
   }
-
-  /* .label {
-    display: flex;
-    padding-left: 20px;
-    padding-bottom: 10px;
-  } */
-
-
 }

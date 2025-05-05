@@ -63,9 +63,11 @@ export const Login: FC = () => {
             </div>
             <div className='pb-6'>
               <PasswordInput
+                placeholder='Password'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 name='password'
+                icon='ShowIcon'
               />
             </div>
             <div className={`pb-6 ${commonStyles.button}`}>

@@ -44,6 +44,7 @@ export const ResetPassword: FC = () => {
         >
           <div className='pb-6'>
             <PasswordInput
+              placeholder='New password'
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               name='password'
@@ -52,7 +53,7 @@ export const ResetPassword: FC = () => {
           <div className='pb-6'>
             <Input
               type='text'
-              placeholder='Enter the verification code sent to your email '
+              placeholder='E-mail code'
               onChange={(e) => setToken(e.target.value)}
               value={token}
               name='token'
