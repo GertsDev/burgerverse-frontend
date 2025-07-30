@@ -17,7 +17,6 @@ Backend repo: [BurgerVerse-backend](https://github.com/GertsDev/burgerverse-back
 
 ![marketing banner](https://benevolent-wolverine-87.convex.cloud/api/storage/37aabb04-d9e1-4ef0-80bb-84c8c7180139)
 
-!()
 
 ## ✨ Features
 
